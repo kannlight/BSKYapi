@@ -2,13 +2,24 @@ from atproto import Client
 import json
 import os
 from dotenv import load_dotenv
+import datetime
 
+# 認証
 load_dotenv()
-
 client = Client()
 client.login('kanlight.bsky.social', os.environ.get("pswd"))
 
-res = client.get_post_thread(uri='at://did:plc:qatx2fvwppss5d3qye6tpvcu/app.bsky.feed.post/3l7oysmcxqu2q')
-thread = res.thread.json()
+# ファイルを開く
+filename = './output_test/' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.json'
+f = open(filename, 'w')
 
-print(json.dumps(thread, indent=4, sort_keys=True, ensure_ascii=False))
+# リクエスト
+res = client.get_post_thread(uri='at://did:plc:qatx2fvwppss5d3qye6tpvcu/app.bsky.feed.post/3l7oysmcxqu2q')
+thread = res.thread.model_dump_json()
+decoded_thread = json.loads(thread)
+
+# デバッグ用出力
+# print(json.dumps(decoded_thread, indent=4, sort_keys=True, ensure_ascii=False))
+
+# ファイルに書き出す
+json.dump(decoded_thread, f, indent=4)
