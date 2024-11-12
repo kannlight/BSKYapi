@@ -10,7 +10,7 @@ client = Client()
 client.login('kanlight.bsky.social', os.environ.get("pswd"))
 
 # リクエスト
-res = client.get_post_thread(uri='at://did:plc:qatx2fvwppss5d3qye6tpvcu/app.bsky.feed.post/3l7oysmcxqu2q')
+res = client.get_post_thread(uri='at://did:plc:lisufijnrz42yoqth2stevje/app.bsky.feed.post/3lan7pyvc7s2g')
 thread = res.thread.model_dump_json()
 decoded_thread = json.loads(thread)
 
