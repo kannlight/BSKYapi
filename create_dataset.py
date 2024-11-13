@@ -164,8 +164,10 @@ def test():
     output_collect_dir = 'output_collect_test'
     data_dir = 'data_test'
     inner_data_dir = 'inner_data_test'
-    collect_data(None, None, None, output_collect_dir)
+    # collect_data(None, None, None, output_collect_dir)
     # collect_data(user_did='did:plc:va3uvvsa2aqfdqvjc44itph4')
+    initialize(inner_data_dir)
+    create_talk('output_collect_test/20241112_122652.json', inner_data_dir, data_dir)
 
 if __name__ == "__main__":
     test()
