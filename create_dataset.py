@@ -113,15 +113,11 @@ def extract_talk_from_array(array, inner_data_dir, data_dir):
     while head < l-2:
         i = head
 
-        if check_utter(array[i]):
-            break
         # 受信者(暫定)の最後の発話
         recept_did = array[i]['author']['did']
         last_utter = array[i]['record']['text']
         i += 1
         while i < l and array[i]['author']['did'] == recept_did:
-            if check_utter(array[i]):
-                break
             # 同じ投稿者の投稿が続く場合はスペースで結合することにする(特に理由はない)
             last_utter += ' ' + array[i]['record']['text']
             i += 1
@@ -130,8 +126,6 @@ def extract_talk_from_array(array, inner_data_dir, data_dir):
         # 次のheadの位置を記憶しておく
         next_head = i
 
-        if check_utter(array[i]):
-            break
         # 送信者の発話
         sender_did = array[i]['author']['did']
         sent_utter = array[i]['record']['text']
@@ -139,16 +133,12 @@ def extract_talk_from_array(array, inner_data_dir, data_dir):
         if i >= l:
             break
         while i < l and array[i]['author']['did'] == sender_did:
-            if check_utter(array[i]):
-                break
             # 同じ投稿者の投稿が続くならスペースで結合
             sent_utter += ' ' + array[i]['record']['text']
             i += 1
         if i >= l:
             break
 
-        if check_utter(array[i]):
-            break
         # 1発話目と3発話目が同じ人でなければ対話データ不成立
         if array[i]['author']['did'] != recept_did:
             head = next_head
@@ -165,11 +155,13 @@ def extract_talk_from_array(array, inner_data_dir, data_dir):
 
         i += 1
         while i < l and array[i]['author']['did'] == recept_did:
-            if check_utter(array[i]):
-                break
             # 同じ投稿者の投稿が続くならスペースで結合
             forecast_utter += ' ' + array[i]['record']['text']
             i += 1
+
+        if check_talk(array, head, i):
+            head = next_head
+            continue
 
         # 対話データ完成
         talk = {'last_utter':last_utter, 'sent_utter':sent_utter, 'forecast_utter':forecast_utter}
@@ -193,9 +185,12 @@ def extract_talk_from_array(array, inner_data_dir, data_dir):
         # headをずらして繰り返し
         head = next_head
 
-def check_utter(post):
-    # 除外条件：リンクやメンション、画像、動画を含む投稿
-    return (not 'http' in post['record']['text']) and (not '@' in post['record']['text']) and post['embed'] == None
+def check_talk(array, head, i):
+    for j in range(head,i):
+        # 除外条件：リンクやメンション、画像、動画を含む投稿
+        if 'http' in array[j]['record']['text'] or '@' in array[j]['record']['text'] or array[j]['embed'] != None:
+            return True
+    return False
 
 def test():
     output_collect_dir = 'output_collect_test'
@@ -203,7 +198,7 @@ def test():
     inner_data_dir = 'inner_data_test'
     # collect_data(None, None, None, output_collect_dir)
     # collect_data(user_did='did:plc:va3uvvsa2aqfdqvjc44itph4')
-    # initialize(inner_data_dir)
+    initialize(inner_data_dir)
     create_talk('output_collect_test/20241112_122652.json', inner_data_dir, data_dir)
 
 if __name__ == "__main__":
