@@ -10,14 +10,14 @@ client = Client()
 client.login('kanlight.bsky.social', os.environ.get("pswd"))
 
 # リクエスト
-res = client.get_post_thread(uri='at://did:plc:lisufijnrz42yoqth2stevje/app.bsky.feed.post/3lan7pyvc7s2g')
+res = client.get_post_thread(uri='at://did:plc:vgyuq3dqwcsyhs7nomxkguhh/app.bsky.feed.post/3laolw3jydc2h')
 thread = res.thread.model_dump_json()
 decoded_thread = json.loads(thread)
 
 # デバッグ用出力
-# print(json.dumps(decoded_thread, indent=4, sort_keys=True, ensure_ascii=False))
+print(json.dumps(decoded_thread, indent=4, sort_keys=True, ensure_ascii=False))
 
 # ファイルに書き出す
-filename = './output_test/' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.json'
-with open(filename, 'w') as f:
-    json.dump(decoded_thread, f, indent=4)
+# filename = './output_test/' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.json'
+# with open(filename, 'w') as f:
+#     json.dump(decoded_thread, f, indent=4)
