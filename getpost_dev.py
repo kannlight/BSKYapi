@@ -3,6 +3,7 @@ import json
 import os
 from dotenv import load_dotenv
 import datetime
+import sys
 
 # 認証
 load_dotenv()
@@ -10,7 +11,8 @@ client = Client()
 client.login('kanlight.bsky.social', os.environ.get("pswd"))
 
 # リクエスト
-res = client.get_posts(uris=['at://did:plc:vgyuq3dqwcsyhs7nomxkguhh/app.bsky.feed.post/3laolw3jydc2h'])
+args = sys.argv
+res = client.get_posts(uris=[args[1]])
 json_res = res.model_dump_json()
 decoded_res = json.loads(json_res)
 

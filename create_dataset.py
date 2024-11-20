@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 import datetime
 import pickle
+import shutil
 
 # 認証
 load_dotenv()
@@ -14,6 +15,9 @@ def initialize(inner_data_dir = 'inner_data'):
     searched_trees = set()
     with open(inner_data_dir+'/searched_trees.txt','xb') as f:
         pickle.dump(searched_trees, f)
+    error_trees = set()
+    with open(inner_data_dir+'/error_trees.txt','xb') as f:
+        pickle.dump(error_trees, f)
     searched_talks = set()
     with open(inner_data_dir+'/searched_talks.txt','xb') as f:
         pickle.dump(searched_talks, f)
@@ -60,16 +64,32 @@ def create_talk(json_filename, count, inner_data_dir = 'inner_data', data_dir = 
     searched_trees = set()
     with open(inner_data_dir+'/searched_trees.txt','rb') as f:
         searched_trees = pickle.load(f)
+    error_trees = set()
+    with open(inner_data_dir+'/error_trees.txt','rb') as f:
+        error_trees = pickle.load(f)
     # 各投稿について処理
     for post in data['posts']:
         # 根を参照
-        root_uri = post['record']['reply']['root']['uri']
+        if post['record']['reply'] != None:
+            root_uri = post['record']['reply']['root']['uri']
+        else:
+            # 自身が根である場合はreplyがnullなので自身のuriを直接参照
+            root_uri = post['uri']
         # 木が探索済みでないか確認
-        if root_uri in searched_trees:
+        if root_uri in searched_trees or root_uri in error_trees:
             continue
         # 木全体を取得
-        res = client.get_post_thread(uri=root_uri, depth=1000)
-        count += 1
+        try:
+            res = client.get_post_thread(uri=root_uri, depth=1000)
+            count += 1
+        except Exception:
+            # 投稿が削除されている場合など何かしらエラーが返ってきたらスキップ
+            print('cause error in tree {}'.format(root_uri))
+            error_trees.add(root_uri)
+            with open(inner_data_dir+'/error_trees.txt','wb') as f:
+                pickle.dump(error_trees, f)
+            continue
+
         thread = res.thread.model_dump_json()
         decoded_thread = json.loads(thread)
 
@@ -148,7 +168,6 @@ def extract_talk_from_array(array, inner_data_dir, data_dir):
 
         # 受信者の次の発話
         forecast_utter = array[i]['record']['text']
-        uri = array[i]['uri']
 
         # 対話が探索済みでないか確認
         end_uri = array[i]['uri']
@@ -167,7 +186,7 @@ def extract_talk_from_array(array, inner_data_dir, data_dir):
             continue
 
         # 対話データ完成
-        talk = {'last_utter':last_utter, 'sent_utter':sent_utter, 'forecast_utter':forecast_utter, 'uri':uri}
+        talk = {'last_utter':last_utter, 'sent_utter':sent_utter, 'forecast_utter':forecast_utter, 'uri':end_uri}
         # 完成したデータを書き込む
         filename = data_dir+'/'+recept_did.replace('did:plc:', '')+'.json'
         if os.path.exists(filename):
@@ -202,9 +221,47 @@ def test():
     inner_data_dir = 'inner_data_test'
     # collect_data(None, None, None, output_collect_dir)
     # collect_data(user_did='did:plc:va3uvvsa2aqfdqvjc44itph4')
-    initialize(inner_data_dir)
+    # initialize(inner_data_dir)
     count = create_talk('output_collect_test/20241112_122652.json', count, inner_data_dir, data_dir)
     print(count)
 
+def test2(size_TH):
+    count = 0
+    output_collect_dir = 'output_collect_test2-2'
+    creating_data_dir = 'creating_data_test2-2'
+    data_dir = 'data_test2-2'
+    inner_data_dir = 'inner_data_test2-2'
+    initialize(inner_data_dir)
+
+    filename = collect_data(None, None, None, output_collect_dir)
+    count += 1
+    count = create_talk(filename, count, inner_data_dir, creating_data_dir)
+    for someone_file in os.listdir(creating_data_dir):
+        print('request {} times'.format(count))
+        size = size_TH
+        with open(creating_data_dir+'/'+someone_file, 'r') as f:
+            size = len(json.load(f)['data'])
+        while size < size_TH:
+            prev_size = size
+            filename = collect_data('did:plc:'+someone_file.replace('.json',''), None, None, output_collect_dir)
+            count += 1
+            count = create_talk(filename, count, inner_data_dir, creating_data_dir)
+            with open(creating_data_dir+'/'+someone_file, 'r') as f:
+                size = len(json.load(f)['data'])
+            if size == prev_size:
+                break
+        if size < size_TH:
+            print('{} ended in {}'.format(someone_file, size))
+            continue
+        shutil.move(creating_data_dir+'/'+someone_file, data_dir)
+        print('{} reached {}'.format(someone_file, size))
+    print('request {} times'.format(count))
+
 if __name__ == "__main__":
-    test()
+    test2(10)
+    # error_trees = set()
+    # with open('inner_data_test2-2/error_trees.txt', 'rb') as f:
+    #     error_trees = pickle.load(f)
+    # for tree in error_trees:
+    #     print('cause error in tree {}'.format(tree))
+        
