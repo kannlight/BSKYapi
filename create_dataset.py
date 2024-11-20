@@ -202,7 +202,7 @@ def test():
     inner_data_dir = 'inner_data_test'
     # collect_data(None, None, None, output_collect_dir)
     # collect_data(user_did='did:plc:va3uvvsa2aqfdqvjc44itph4')
-    # initialize(inner_data_dir)
+    initialize(inner_data_dir)
     count = create_talk('output_collect_test/20241112_122652.json', count, inner_data_dir, data_dir)
     print(count)
 
