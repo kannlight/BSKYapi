@@ -28,11 +28,11 @@ def collect_data(user_did = None, since = None, until = None, output_collect_dir
     if until != None:
         p['until'] = until
     # デバッグ用
-    print(p)
+    # print(p)
     # 検索結果を取得しjsonへ変換
     res = client.app.bsky.feed.search_posts(params=p)
     decoded_res = json.loads(res.model_dump_json())
-
+    
     # 画像や動画を含む投稿やリプライの親子を持たない投稿を除外
     noises = []
     for post in decoded_res['posts']:
@@ -51,7 +51,7 @@ def collect_data(user_did = None, since = None, until = None, output_collect_dir
         json.dump(decoded_res, f, indent=4)
     return filename
 
-def create_talk(json_filename, inner_data_dir = 'inner_data', data_dir = 'data'):
+def create_talk(json_filename, count, inner_data_dir = 'inner_data', data_dir = 'data'):
     # ファイルから投稿データを読み込み
     data = {}
     with open(json_filename, 'r') as f:
@@ -69,6 +69,7 @@ def create_talk(json_filename, inner_data_dir = 'inner_data', data_dir = 'data')
             continue
         # 木全体を取得
         res = client.get_post_thread(uri=root_uri, depth=1000)
+        count += 1
         thread = res.thread.model_dump_json()
         decoded_thread = json.loads(thread)
 
@@ -83,6 +84,7 @@ def create_talk(json_filename, inner_data_dir = 'inner_data', data_dir = 'data')
         # 探索済みの木の集合を保存
         with open(inner_data_dir+'/searched_trees.txt','wb') as f:
             pickle.dump(searched_trees, f)
+    return count
 
 # 木を根から葉への配列にばらす関数。
 def tree_to_array(tree):
@@ -146,6 +148,7 @@ def extract_talk_from_array(array, inner_data_dir, data_dir):
 
         # 受信者の次の発話
         forecast_utter = array[i]['record']['text']
+        uri = array[i]['uri']
 
         # 対話が探索済みでないか確認
         end_uri = array[i]['uri']
@@ -164,7 +167,7 @@ def extract_talk_from_array(array, inner_data_dir, data_dir):
             continue
 
         # 対話データ完成
-        talk = {'last_utter':last_utter, 'sent_utter':sent_utter, 'forecast_utter':forecast_utter}
+        talk = {'last_utter':last_utter, 'sent_utter':sent_utter, 'forecast_utter':forecast_utter, 'uri':uri}
         # 完成したデータを書き込む
         filename = data_dir+'/'+recept_did+'.json'
         if os.path.exists(filename):
@@ -193,13 +196,15 @@ def check_talk(array, head, i):
     return False
 
 def test():
+    count = 0
     output_collect_dir = 'output_collect_test'
     data_dir = 'data_test'
     inner_data_dir = 'inner_data_test'
     # collect_data(None, None, None, output_collect_dir)
     # collect_data(user_did='did:plc:va3uvvsa2aqfdqvjc44itph4')
     initialize(inner_data_dir)
-    create_talk('output_collect_test/20241112_122652.json', inner_data_dir, data_dir)
+    count = create_talk('output_collect_test/20241112_122652.json', count, inner_data_dir, data_dir)
+    print(count)
 
 if __name__ == "__main__":
     test()
