@@ -227,10 +227,10 @@ def test():
 
 def test2(size_TH):
     count = 0
-    output_collect_dir = 'output_collect_test2-2'
-    creating_data_dir = 'creating_data_test2-2'
-    data_dir = 'data_test2-2'
-    inner_data_dir = 'inner_data_test2-2'
+    output_collect_dir = 'output_collect_test2-3'
+    creating_data_dir = 'creating_data_test2-3'
+    data_dir = 'data_test2-3'
+    inner_data_dir = 'inner_data_test2-3'
     initialize(inner_data_dir)
 
     filename = collect_data(None, None, None, output_collect_dir)
@@ -260,7 +260,7 @@ def test2(size_TH):
 if __name__ == "__main__":
     test2(10)
     # error_trees = set()
-    # with open('inner_data_test2-2/error_trees.txt', 'rb') as f:
+    # with open('inner_data_test2-3/error_trees.txt', 'rb') as f:
     #     error_trees = pickle.load(f)
     # for tree in error_trees:
     #     print('cause error in tree {}'.format(tree))
