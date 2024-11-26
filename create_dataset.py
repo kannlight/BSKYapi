@@ -130,17 +130,15 @@ def extract_talk_from_array(array, inner_data_dir, data_dir):
     with open(inner_data_dir+'/searched_talks.txt','rb') as f:
         searched_talks = pickle.load(f)
     l = len(array)
-    # 末尾から3発話目までを処理、先頭をheadとする
     head = 0
+    # 末尾から3発話目までを処理、先頭をheadとする
     while head < l-2:
+        talk = []
         i = head
         # 受信者(暫定)の最後の発話
         recept_did = array[i]['author']['did']
-        last_utter = array[i]['record']['text']
-        i += 1
         while i < l and array[i]['author']['did'] == recept_did:
-            # 同じ投稿者の投稿が続く場合はスペースで結合することにする(特に理由はない)
-            last_utter += ' ' + array[i]['record']['text']
+            talk.append({'author':recept_did, 'type':1, 'utter':array[i]['record']['text']})
             i += 1
         if i >= l:
             break
@@ -148,13 +146,8 @@ def extract_talk_from_array(array, inner_data_dir, data_dir):
         next_head = i
         # 送信者の発話
         sender_did = array[i]['author']['did']
-        sent_utter = array[i]['record']['text']
-        i += 1
-        if i >= l:
-            break
         while i < l and array[i]['author']['did'] == sender_did:
-            # 同じ投稿者の投稿が続くならスペースで結合
-            sent_utter += ' ' + array[i]['record']['text']
+            talk.append({'author':sender_did, 'type':2, 'utter':array[i]['record']['text']})
             i += 1
         if i >= l:
             break
@@ -162,31 +155,28 @@ def extract_talk_from_array(array, inner_data_dir, data_dir):
         if array[i]['author']['did'] != recept_did:
             head = next_head
             continue
-        # 受信者の次の発話
-        forecast_utter = array[i]['record']['text']
         # 対話が探索済みでないか確認
         end_uri = array[i]['uri']
         if end_uri in searched_talks:
             head = next_head
             continue
-        i += 1
+        # 受信者の次の発話
         while i < l and array[i]['author']['did'] == recept_did:
-            # 同じ投稿者の投稿が続くならスペースで結合
-            forecast_utter += ' ' + array[i]['record']['text']
+            talk.append({'author':recept_did, 'type':3, 'utter':array[i]['record']['text']})
             i += 1
+        # 除外条件：リンクやメンション、画像、動画を含む投稿 を満たしてないか確認
         if check_talk(array, head, i):
             head = next_head
             continue
         # 対話データ完成
-        talk = {'last_utter':last_utter, 'sent_utter':sent_utter, 'forecast_utter':forecast_utter, 'uri':end_uri}
+        talk_data = {'talk':talk, 'uri':end_uri}
         # 完成したデータを書き込む
         filename = data_dir+'/'+recept_did.replace('did:plc:', '')+'.json'
+        data = {'data':[]}
         if os.path.exists(filename):
             with open(filename, 'r') as f:
                 data = json.load(f)
-        else:
-            data = {'data':[]}
-        data['data'].append(talk)
+        data['data'].append(talk_data)
         with open(filename, 'w') as f:
             json.dump(data, f, indent=4,ensure_ascii=False)
         # 探索済みの対話にこの対話を追加
@@ -217,17 +207,18 @@ def test():
 
 def test2(size_TH):
     count = 0
-    output_collect_dir = 'output_collect_test2-4'
-    creating_data_dir = 'creating_data_test2-4'
-    data_dir = 'data_test2-4'
-    inner_data_dir = 'inner_data_test2-4'
-    # initialize(inner_data_dir)
+    output_collect_dir = 'output_collect_test2-7'
+    creating_data_dir = 'creating_data_test2-7'
+    data_dir = 'data_test2-7'
+    inner_data_dir = 'inner_data_test2-7'
+    initialize(inner_data_dir)
 
     filename = collect_data(None, None, None, output_collect_dir)
     count += 1
     count = create_talk(filename, count, inner_data_dir, creating_data_dir)
     for someone_file in os.listdir(creating_data_dir):
         print('request {} times'.format(count))
+        print(someone_file)
         size = size_TH
         with open(creating_data_dir+'/'+someone_file, 'r') as f:
             size = len(json.load(f)['data'])
@@ -241,10 +232,10 @@ def test2(size_TH):
             if size == prev_size:
                 break
         if size < size_TH:
-            print('{} ended in {}'.format(someone_file, size))
+            print('  ended in {}'.format(size))
             continue
         shutil.move(creating_data_dir+'/'+someone_file, data_dir)
-        print('{} reached {}'.format(someone_file, size))
+        print('  reached {}'.format(size))
     print('request {} times'.format(count))
 
 if __name__ == "__main__":
