@@ -11,6 +11,7 @@ output_collect_dir = 'output_collect'
 creating_data_dir = 'creating_data'
 data_dir = 'data'
 poor_data_dir = 'poor_data'
+logfile = 'log/logfile'
 count = 0
 
 # 認証
@@ -39,8 +40,6 @@ def collect_data(user_did = None, since = None, until = None):
         p['since'] = since
     if until != None:
         p['until'] = until
-    # デバッグ用
-    # print(p)
     # 検索結果を取得しjsonへ変換
     res = client.app.bsky.feed.search_posts(params=p)
     count += 1
@@ -94,7 +93,8 @@ def create_talk(json_filename):
             count += 1
         except Exception:
             # 投稿が削除されている場合など何かしらエラーが返ってきたらスキップ
-            print('cause error in tree {}'.format(root_uri))
+            with open(logfile, 'w') as f:
+                print('cause error in tree {}'.format(root_uri),file=f)
             error_trees.add(root_uri)
             with open(inner_data_dir+'/error_trees.txt','wb') as f:
                 pickle.dump(error_trees, f)
@@ -212,16 +212,13 @@ def test():
     # collect_data(user_did='did:plc:va3uvvsa2aqfdqvjc44itph4')
     # initialize(inner_data_dir)
     count = create_talk('output_collect_test/20241112_122652.json', count, inner_data_dir, data_dir)
-    print(count)
-
-def new_data():
-    filename = collect_data()
-    create_talk(filename)
+    print(count)  
 
 def increase_data(size_TH):
     for someone_file in os.listdir(creating_data_dir):
-        print('request {} times'.format(count))
-        print(someone_file)
+        with open(logfile, 'w') as f:
+            print('request {} times'.format(count),file=f)
+            print(someone_file,file=f)
         size = size_TH
         with open(creating_data_dir+'/'+someone_file, 'r') as f:
             size = len(json.load(f)['data'])
@@ -235,11 +232,14 @@ def increase_data(size_TH):
                 break
         if size < size_TH:
             shutil.move(creating_data_dir+'/'+someone_file, poor_data_dir)
-            print('  ended in {}'.format(size))
+            with open(logfile, 'w') as f:
+                print('  ended in {}'.format(size),file=f)
             continue
         shutil.move(creating_data_dir+'/'+someone_file, data_dir)
-        print('  reached {}'.format(size))
-    print('request {} times'.format(count))
+        with open(logfile, 'w') as f:
+            print('  reached {}'.format(size),file=f)
+    with open(logfile, 'w') as f:
+        print('request {} times'.format(count),file=f)
 
 def test2():
     global output_collect_dir, creating_data_dir, data_dir, poor_data_dir, inner_data_dir
@@ -250,11 +250,31 @@ def test2():
     inner_data_dir = 'test_data/inner_data_test2-9'
     size = 10
     # initialize()
-    new_data()
+    filename = collect_data()
+    create_talk(filename)
     increase_data(size)
     
-    
+def main():
+    global output_collect_dir, creating_data_dir, data_dir, poor_data_dir, inner_data_dir, logfile, count
+    output_collect_dir = 'output_collect'
+    creating_data_dir = 'creating_data'
+    data_dir = 'data'
+    poor_data_dir = 'poor_data'
+    inner_data_dir = 'inner_data'
+    logfile = 'log/'+datetime.datetime.now().strftime('%Y%m%d_%H%M%S')+'.txt'
+    count = 0
+    size = 10
+    initialize()
+    filename = collect_data()
+    create_talk(filename)
+    increase_data(size)
+    while count < 3000:
+        with open(filename, 'r') as f:
+            oldest = json.load(f)['posts'][-1]['record']['created_at']
+        filename = collect_data(until=oldest)
+        create_talk(filename)
+        increase_data(size)
 
 if __name__ == "__main__":
-    test2()
+    main()
         
