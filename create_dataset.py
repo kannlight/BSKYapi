@@ -29,9 +29,6 @@ def initialize():
     searched_talks = set()
     with open(inner_data_dir+'/searched_talks.txt','xb') as f:
         pickle.dump(searched_talks, f)
-    created_authors = set()
-    with open(inner_data_dir+'/created_authors.txt','xb') as f:
-        pickle.dump(created_authors, f)
 
 def collect_data(user_did = None, since = None, until = None):
     global count
@@ -142,9 +139,7 @@ def extract_talk_from_array(array):
     with open(inner_data_dir+'/searched_talks.txt','rb') as f:
         searched_talks = pickle.load(f)
     # 作成済みの受信者の集合を読み込み
-    created_authors = set()
-    with open(inner_data_dir+'/created_authors.txt','rb') as f:
-        created_authors = pickle.load(f)
+    created_files = os.listdir(data_dir)
     l = len(array)
     head = 0
     # 末尾から3発話目までを処理、先頭をheadとする
@@ -153,9 +148,6 @@ def extract_talk_from_array(array):
         i = head
         # 受信者(暫定)の最後の発話
         recept_did = array[i]['author']['did']
-        # 作成済みの受信者ならスキップ
-        if recept_did in created_authors:
-            continue
         while i < l and array[i]['author']['did'] == recept_did:
             talk.append({'author':recept_did, 'type':1, 'utter':array[i]['record']['text']})
             i += 1
@@ -163,6 +155,10 @@ def extract_talk_from_array(array):
             break
         # 次のheadの位置を記憶しておく
         next_head = i
+        # 作成済みの受信者ならスキップ
+        if recept_did.replace('did:plc:', '')+'.json' in created_files:
+            head = next_head
+            continue
         # 送信者の発話
         sender_did = array[i]['author']['did']
         while i < l and array[i]['author']['did'] == sender_did:
@@ -262,10 +258,6 @@ def increase_data(size_TH):
                 print('  ended in {}'.format(size),file=f)
             continue
         shutil.move(creating_data_dir+'/'+someone_file, data_dir)
-        # 作成済みの受信者の集合を更新
-        created_authors = set()
-        with open(inner_data_dir+'/created_authors.txt','r+b') as f:
-            pickle.dump(pickle.load(f).add('did:plc:'+someone_file.replace('.json','')),f)
         with open(logfile, 'a') as f:
             print('  reached {}'.format(size),file=f)
     with open(logfile, 'a') as f:
@@ -285,12 +277,7 @@ def test2():
     increase_data(size)
     
 def main():
-    global output_collect_dir, creating_data_dir, data_dir, poor_data_dir, inner_data_dir, logfile, count
-    output_collect_dir = 'output_collect'
-    creating_data_dir = 'creating_data'
-    data_dir = 'data'
-    poor_data_dir = 'poor_data'
-    inner_data_dir = 'inner_data'
+    global logfile
     logfile = 'log/'+datetime.datetime.now().strftime('%Y%m%d_%H%M%S')+'.txt'
     count = 0
     size = 10
@@ -308,4 +295,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-        
