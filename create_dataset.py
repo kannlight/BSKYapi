@@ -93,7 +93,7 @@ def create_talk(json_filename):
             count += 1
         except Exception:
             # 投稿が削除されている場合など何かしらエラーが返ってきたらスキップ
-            with open(logfile, 'w') as f:
+            with open(logfile, 'a') as f:
                 print('cause error in tree {}'.format(root_uri),file=f)
             error_trees.add(root_uri)
             with open(inner_data_dir+'/error_trees.txt','wb') as f:
@@ -216,7 +216,7 @@ def test():
 
 def increase_data(size_TH):
     for someone_file in os.listdir(creating_data_dir):
-        with open(logfile, 'w') as f:
+        with open(logfile, 'a') as f:
             print('request {} times'.format(count),file=f)
             print(someone_file,file=f)
         size = size_TH
@@ -232,13 +232,13 @@ def increase_data(size_TH):
                 break
         if size < size_TH:
             shutil.move(creating_data_dir+'/'+someone_file, poor_data_dir)
-            with open(logfile, 'w') as f:
+            with open(logfile, 'a') as f:
                 print('  ended in {}'.format(size),file=f)
             continue
         shutil.move(creating_data_dir+'/'+someone_file, data_dir)
-        with open(logfile, 'w') as f:
+        with open(logfile, 'a') as f:
             print('  reached {}'.format(size),file=f)
-    with open(logfile, 'w') as f:
+    with open(logfile, 'a') as f:
         print('request {} times'.format(count),file=f)
 
 def test2():
@@ -264,7 +264,8 @@ def main():
     logfile = 'log/'+datetime.datetime.now().strftime('%Y%m%d_%H%M%S')+'.txt'
     count = 0
     size = 10
-    initialize()
+    if not os.path.exists(inner_data_dir+'/searched_trees.txt'):
+        initialize()
     filename = collect_data()
     create_talk(filename)
     increase_data(size)
