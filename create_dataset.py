@@ -6,12 +6,19 @@ import datetime
 import pickle
 import shutil
 
+inner_data_dir = 'inner_data'
+output_collect_dir = 'output_collect'
+creating_data_dir = 'creating_data'
+data_dir = 'data'
+poor_data_dir = 'poor_data'
+count = 0
+
 # 認証
 load_dotenv()
 client = Client()
 client.login('kanlight.bsky.social', os.environ.get("pswd"))
 
-def initialize(inner_data_dir = 'inner_data'):
+def initialize():
     searched_trees = set()
     with open(inner_data_dir+'/searched_trees.txt','xb') as f:
         pickle.dump(searched_trees, f)
@@ -22,7 +29,8 @@ def initialize(inner_data_dir = 'inner_data'):
     with open(inner_data_dir+'/searched_talks.txt','xb') as f:
         pickle.dump(searched_talks, f)
 
-def collect_data(user_did = None, since = None, until = None, output_collect_dir = 'output_collect'):
+def collect_data(user_did = None, since = None, until = None):
+    global count
     # 検索クエリを設定
     p = {'q':'-http -@', 'lang':'ja', 'limit':100}
     if user_did != None:
@@ -35,6 +43,7 @@ def collect_data(user_did = None, since = None, until = None, output_collect_dir
     # print(p)
     # 検索結果を取得しjsonへ変換
     res = client.app.bsky.feed.search_posts(params=p)
+    count += 1
     decoded_res = json.loads(res.model_dump_json())
     
     # 画像や動画を含む投稿やリプライの親子を持たない投稿を除外
@@ -55,7 +64,8 @@ def collect_data(user_did = None, since = None, until = None, output_collect_dir
         json.dump(decoded_res, f, indent=4)
     return filename
 
-def create_talk(json_filename, count, inner_data_dir = 'inner_data', data_dir = 'data'):
+def create_talk(json_filename):
+    global count
     # ファイルから投稿データを読み込み
     data = {}
     with open(json_filename, 'r') as f:
@@ -97,14 +107,13 @@ def create_talk(json_filename, count, inner_data_dir = 'inner_data', data_dir = 
         utters_set = tree_to_array(decoded_thread)
         # 各配列から対話データを抽出
         for utters in utters_set:
-            extract_talk_from_array(utters, inner_data_dir, data_dir)
+            extract_talk_from_array(utters)
         
         # 探索済みの木にこの木を追加
         searched_trees.add(root_uri)
         # 探索済みの木の集合を保存
         with open(inner_data_dir+'/searched_trees.txt','wb') as f:
             pickle.dump(searched_trees, f)
-    return count
 
 # 木を根から葉への配列にばらす関数。
 def tree_to_array(tree):
@@ -124,7 +133,7 @@ def tree_to_array(tree):
         array_set.append([tree['post']])
     return array_set
 
-def extract_talk_from_array(array, inner_data_dir, data_dir):
+def extract_talk_from_array(array):
     # 探索済みの対話の集合を読み込み
     searched_talks = set()
     with open(inner_data_dir+'/searched_talks.txt','rb') as f:
@@ -171,7 +180,7 @@ def extract_talk_from_array(array, inner_data_dir, data_dir):
         # 対話データ完成
         talk_data = {'talk':talk, 'uri':end_uri}
         # 完成したデータを書き込む
-        filename = data_dir+'/'+recept_did.replace('did:plc:', '')+'.json'
+        filename = creating_data_dir+'/'+recept_did.replace('did:plc:', '')+'.json'
         data = {'data':[]}
         if os.path.exists(filename):
             with open(filename, 'r') as f:
@@ -205,17 +214,11 @@ def test():
     count = create_talk('output_collect_test/20241112_122652.json', count, inner_data_dir, data_dir)
     print(count)
 
-def test2(size_TH):
-    count = 0
-    output_collect_dir = 'output_collect_test2-7'
-    creating_data_dir = 'creating_data_test2-7'
-    data_dir = 'data_test2-7'
-    inner_data_dir = 'inner_data_test2-7'
-    initialize(inner_data_dir)
+def new_data():
+    filename = collect_data()
+    create_talk(filename)
 
-    filename = collect_data(None, None, None, output_collect_dir)
-    count += 1
-    count = create_talk(filename, count, inner_data_dir, creating_data_dir)
+def increase_data(size_TH):
     for someone_file in os.listdir(creating_data_dir):
         print('request {} times'.format(count))
         print(someone_file)
@@ -224,20 +227,34 @@ def test2(size_TH):
             size = len(json.load(f)['data'])
         while size < size_TH:
             prev_size = size
-            filename = collect_data('did:plc:'+someone_file.replace('.json',''), None, None, output_collect_dir)
-            count += 1
-            count = create_talk(filename, count, inner_data_dir, creating_data_dir)
+            filename = collect_data('did:plc:'+someone_file.replace('.json',''))
+            create_talk(filename)
             with open(creating_data_dir+'/'+someone_file, 'r') as f:
                 size = len(json.load(f)['data'])
             if size == prev_size:
                 break
         if size < size_TH:
+            shutil.move(creating_data_dir+'/'+someone_file, poor_data_dir)
             print('  ended in {}'.format(size))
             continue
         shutil.move(creating_data_dir+'/'+someone_file, data_dir)
         print('  reached {}'.format(size))
     print('request {} times'.format(count))
 
+def test2():
+    global output_collect_dir, creating_data_dir, data_dir, poor_data_dir, inner_data_dir
+    output_collect_dir = 'test_data/output_collect_test2-9'
+    creating_data_dir = 'test_data/creating_data_test2-9'
+    data_dir = 'test_data/data_test2-9'
+    poor_data_dir = 'test_data/poor_data_test2-9'
+    inner_data_dir = 'test_data/inner_data_test2-9'
+    size = 10
+    # initialize()
+    new_data()
+    increase_data(size)
+    
+    
+
 if __name__ == "__main__":
-    test2(10)
+    test2()
         
