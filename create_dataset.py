@@ -29,6 +29,9 @@ def initialize():
     searched_talks = set()
     with open(inner_data_dir+'/searched_talks.txt','xb') as f:
         pickle.dump(searched_talks, f)
+    created_authors = set()
+    with open(inner_data_dir+'/created_authors.txt','xb') as f:
+        pickle.dump(created_authors, f)
 
 def collect_data(user_did = None, since = None, until = None):
     global count
@@ -138,6 +141,10 @@ def extract_talk_from_array(array):
     searched_talks = set()
     with open(inner_data_dir+'/searched_talks.txt','rb') as f:
         searched_talks = pickle.load(f)
+    # 作成済みの受信者の集合を読み込み
+    created_authors = set()
+    with open(inner_data_dir+'/created_authors.txt','rb') as f:
+        created_authors = pickle.load(f)
     l = len(array)
     head = 0
     # 末尾から3発話目までを処理、先頭をheadとする
@@ -146,6 +153,9 @@ def extract_talk_from_array(array):
         i = head
         # 受信者(暫定)の最後の発話
         recept_did = array[i]['author']['did']
+        # 作成済みの受信者ならスキップ
+        if recept_did in created_authors:
+            continue
         while i < l and array[i]['author']['did'] == recept_did:
             talk.append({'author':recept_did, 'type':1, 'utter':array[i]['record']['text']})
             i += 1
@@ -214,6 +224,19 @@ def test():
     count = create_talk('output_collect_test/20241112_122652.json', count, inner_data_dir, data_dir)
     print(count)  
 
+def merge_data(target_f,adder_f):
+    # 完成したデータを書き込む
+        target_data = {'data':[]}
+        adder_data = {'data':[]}
+        with open(target_f, 'r') as f:
+            target_data = json.load(f)
+        with open(adder_f, 'r') as f:
+            adder_data = json.load(f)
+        target_data['data'] += adder_data['data']
+        with open(target_f, 'w') as f:
+            json.dump(target_data, f, indent=4, ensure_ascii=False)
+        os.remove(adder_f)
+
 def increase_data(size_TH):
     for someone_file in os.listdir(creating_data_dir):
         with open(logfile, 'a') as f:
@@ -231,11 +254,18 @@ def increase_data(size_TH):
             if size == prev_size:
                 break
         if size < size_TH:
-            shutil.move(creating_data_dir+'/'+someone_file, poor_data_dir)
+            if os.path.exists(poor_data_dir+'/'+someone_file):
+                merge_data(poor_data_dir+'/'+someone_file, creating_data_dir+'/'+someone_file)
+            else:
+                shutil.move(creating_data_dir+'/'+someone_file, poor_data_dir)
             with open(logfile, 'a') as f:
                 print('  ended in {}'.format(size),file=f)
             continue
         shutil.move(creating_data_dir+'/'+someone_file, data_dir)
+        # 作成済みの受信者の集合を更新
+        created_authors = set()
+        with open(inner_data_dir+'/created_authors.txt','r+b') as f:
+            pickle.dump(pickle.load(f).add('did:plc:'+someone_file.replace('.json','')),f)
         with open(logfile, 'a') as f:
             print('  reached {}'.format(size),file=f)
     with open(logfile, 'a') as f:
