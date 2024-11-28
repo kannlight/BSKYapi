@@ -252,10 +252,24 @@ def increase_data(size_TH):
         if size < size_TH:
             if os.path.exists(poor_data_dir+'/'+someone_file):
                 merge_data(poor_data_dir+'/'+someone_file, creating_data_dir+'/'+someone_file)
+                with open(logfile, 'a') as f:
+                    print('  added {} to the poor data'.format(size),file=f)
+                poor_size = 0
+                with open(poor_data_dir+'/'+someone_file, 'r') as f:
+                    poor_size = len(json.load(f))
+                if poor_size >= size_TH:
+                    if os.path.exists(data_dir+'/'+someone_file):
+                        merge_data(data_dir+'/'+someone_file, poor_data_dir+'/'+someone_file)
+                        with open(logfile, 'a') as f:
+                            print('  the poor data reached {} and merged into the data'.format(poor_size),file=f)
+                    else:
+                        shutil.move(poor_data_dir+'/'+someone_file, data_dir)
+                        with open(logfile, 'a') as f:
+                            print('  the poor data reached {}'.format(poor_size),file=f)
             else:
                 shutil.move(creating_data_dir+'/'+someone_file, poor_data_dir)
-            with open(logfile, 'a') as f:
-                print('  ended in {}'.format(size),file=f)
+                with open(logfile, 'a') as f:
+                    print('  ended in {}'.format(size),file=f)
             continue
         shutil.move(creating_data_dir+'/'+someone_file, data_dir)
         with open(logfile, 'a') as f:
