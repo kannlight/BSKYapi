@@ -47,8 +47,8 @@ def collect_data(user_did = None, since = None, until = None):
     if until != None:
         p['until'] = until
     # 検索結果を取得しjsonへ変換
-    res = client.app.bsky.feed.search_posts(params=p)
     count += 1
+    res = client.app.bsky.feed.search_posts(params=p)
     decoded_res = json.loads(res.model_dump_json())
     
     # 画像や動画を含む投稿やリプライの親子を持たない投稿を除外
@@ -97,10 +97,9 @@ def create_talk(json_filename):
             continue
         # 木全体を取得
         try:
+            count += 1
             res = client.get_post_thread(uri=root_uri, depth=1000)
-            count += 1
         except Exception:
-            count += 1
             # 投稿が削除されている場合など何かしらエラーが返ってきたらスキップ
             with open(logfile, 'a') as f:
                 print('cause error in tree {}'.format(root_uri),file=f)
@@ -218,16 +217,16 @@ def check_talk(array, head, i):
             return True
     return False
 
-def test():
-    count = 0
-    output_collect_dir = 'output_collect_test'
-    data_dir = 'data_test'
-    inner_data_dir = 'inner_data_test'
-    # collect_data(None, None, None, output_collect_dir)
-    # collect_data(user_did='did:plc:va3uvvsa2aqfdqvjc44itph4')
-    # initialize(inner_data_dir)
-    count = create_talk('output_collect_test/20241112_122652.json', count, inner_data_dir, data_dir)
-    print(count)  
+# def test():
+#     count = 0
+#     output_collect_dir = 'output_collect_test'
+#     data_dir = 'data_test'
+#     inner_data_dir = 'inner_data_test'
+#     # collect_data(None, None, None, output_collect_dir)
+#     # collect_data(user_did='did:plc:va3uvvsa2aqfdqvjc44itph4')
+#     # initialize(inner_data_dir)
+#     count = create_talk('output_collect_test/20241112_122652.json', count, inner_data_dir, data_dir)
+#     print(count)  
 
 def merge_data(target_f,adder_f):
     # 完成したデータを書き込む
@@ -293,11 +292,11 @@ def test2():
     data_dir = 'test_data/data_test2-9'
     poor_data_dir = 'test_data/poor_data_test2-9'
     inner_data_dir = 'test_data/inner_data_test2-9'
-    size = 10
+    sizeTH = 10
     # initialize()
     filename = collect_data()
     create_talk(filename)
-    increase_data(size)
+    increase_data(sizeTH)
     
 def main():
     global logfile
