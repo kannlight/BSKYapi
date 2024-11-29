@@ -5,6 +5,9 @@ from dotenv import load_dotenv
 import datetime
 import pickle
 import shutil
+from httpx import Timeout
+from httpx import RequestError
+import time
 
 inner_data_dir = 'inner_data'
 output_collect_dir = 'output_collect'
@@ -15,13 +18,15 @@ poor_data_dir = 'poor_data'
 logfile = 'log/logfile'
 count = 0
 limit = 3000
+timeout = Timeout(10.0)
+MAX_RETRIES = 3
 
 class ReachedLimit(Exception):
     pass
 
 # 認証
 load_dotenv()
-client = Client()
+client = Client(timeout=timeout)
 client.login('kanlight.bsky.social', os.environ.get("pswd"))
 
 def initialize():
@@ -48,8 +53,16 @@ def collect_data(user_did = None, since = None, until = None):
     if until != None:
         p['until'] = until
     # 検索結果を取得しjsonへ変換
-    count += 1
-    res = client.app.bsky.feed.search_posts(params=p)
+    for attempt in range(MAX_RETRIES):
+        try:
+            count += 1
+            res = client.app.bsky.feed.search_posts(params=p)
+            break  # 成功した場合、ループを抜ける
+        except RequestError as e:
+            if attempt < MAX_RETRIES - 1:
+                time.sleep(2 ** attempt)  # リトライ前に指数的に待機
+            else:
+                raise e  # リトライ上限に達したら例外をスロー
     decoded_res = json.loads(res.model_dump_json())
     
     # 画像や動画を含む投稿やリプライの親子を持たない投稿を除外
@@ -101,8 +114,16 @@ def create_talk(json_filename):
             continue
         # 木全体を取得
         try:
-            count += 1
-            res = client.get_post_thread(uri=root_uri, depth=1000)
+            for attempt in range(MAX_RETRIES):
+                try:
+                    count += 1
+                    res = client.get_post_thread(uri=root_uri, depth=1000)
+                    break  # 成功した場合、ループを抜ける
+                except RequestError as e:
+                    if attempt < MAX_RETRIES - 1:
+                        time.sleep(2 ** attempt)  # リトライ前に指数的に待機
+                    else:
+                        raise e  # リトライ上限に達したら例外をスロー
         except Exception:
             # 投稿が削除されている場合など何かしらエラーが返ってきたらスキップ
             with open(logfile, 'a') as f:
@@ -111,7 +132,6 @@ def create_talk(json_filename):
             with open(inner_data_dir+'/error_trees.txt','wb') as f:
                 pickle.dump(error_trees, f)
             continue
-
         thread = res.thread.model_dump_json()
         decoded_thread = json.loads(thread)
 
