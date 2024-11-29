@@ -8,6 +8,7 @@ import shutil
 
 inner_data_dir = 'inner_data'
 output_collect_dir = 'output_collect'
+output_collect_author_dir = 'output_collect_author'
 creating_data_dir = 'creating_data'
 data_dir = 'data'
 poor_data_dir = 'poor_data'
@@ -64,7 +65,10 @@ def collect_data(user_did = None, since = None, until = None):
         decoded_res['posts'].remove(noise)
     
     # ファイルに書き出す
-    filename = output_collect_dir+'/'+datetime.datetime.now().strftime('%Y%m%d_%H%M%S')+'.json'
+    if user_did == None:
+        filename = output_collect_dir+'/'+datetime.datetime.now().strftime('%Y%m%d_%H%M%S')+'.json'
+    else:
+        filename = output_collect_author_dir+'/'+datetime.datetime.now().strftime('%Y%m%d_%H%M%S')+'.json'
     with open(filename, 'w') as f:
         json.dump(decoded_res, f, indent=4)
     return filename
@@ -249,14 +253,17 @@ def increase_data(size_TH):
         size = size_TH
         with open(creating_data_dir+'/'+someone_file, 'r') as f:
             size = len(json.load(f)['data'])
+        last_time = None
         while size < size_TH:
             prev_size = size
-            filename = collect_data('did:plc:'+someone_file.replace('.json',''))
+            filename = collect_data('did:plc:'+someone_file.replace('.json',''), until=last_time)
             create_talk(filename)
             with open(creating_data_dir+'/'+someone_file, 'r') as f:
                 size = len(json.load(f)['data'])
             if size == prev_size:
                 break
+            with open(filename, 'r') as f:
+                last_time = json.load(f)['posts'][-1]['record']['created_at']
         if size < size_TH:
             if os.path.exists(poor_data_dir+'/'+someone_file):
                 merge_data(poor_data_dir+'/'+someone_file, creating_data_dir+'/'+someone_file)
@@ -311,6 +318,8 @@ def main():
     while count < limit:
         with open(filename, 'r') as f:
             oldest = json.load(f)['posts'][-1]['record']['created_at']
+        with open(logfile, 'a') as f:
+            print('collect until {} '.format(oldest),file=f)
         filename = collect_data(until=oldest)
         create_talk(filename)
         increase_data(sizeTH)
