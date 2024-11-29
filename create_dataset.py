@@ -24,8 +24,16 @@ class ReachedLimit(Exception):
 
 # 認証
 load_dotenv()
-client = Client()
-client.login('kanlight.bsky.social', os.environ.get("pswd"))
+for attempt in range(MAX_RETRIES):
+    try:
+        client = Client()
+        client.login('kanlight.bsky.social', os.environ.get("pswd"))
+        break  # 成功した場合、ループを抜ける
+    except (exceptions.InvokeTimeoutError,exceptions.NetworkError) as e:
+        if attempt < MAX_RETRIES - 1:
+            time.sleep(2 ** attempt)  # リトライ前に指数的に待機
+        else:
+            raise e  # リトライ上限に達したら例外をスロー
 
 def initialize():
     searched_trees = set()
@@ -56,7 +64,7 @@ def collect_data(user_did = None, since = None, until = None):
             count += 1
             res = client.app.bsky.feed.search_posts(params=p)
             break  # 成功した場合、ループを抜ける
-        except exceptions.InvokeTimeoutError as e:
+        except (exceptions.InvokeTimeoutError,exceptions.NetworkError) as e:
             if attempt < MAX_RETRIES - 1:
                 time.sleep(2 ** attempt)  # リトライ前に指数的に待機
             else:
@@ -117,7 +125,7 @@ def create_talk(json_filename):
                     count += 1
                     res = client.get_post_thread(uri=root_uri, depth=1000)
                     break  # 成功した場合、ループを抜ける
-                except exceptions.InvokeTimeoutError as e:
+                except (exceptions.InvokeTimeoutError,exceptions.NetworkError) as e:
                     if attempt < MAX_RETRIES - 1:
                         time.sleep(2 ** attempt)  # リトライ前に指数的に待機
                     else:
