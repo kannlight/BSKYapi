@@ -13,6 +13,10 @@ data_dir = 'data'
 poor_data_dir = 'poor_data'
 logfile = 'log/logfile'
 count = 0
+limit = 3000
+
+class ReachedLimit(Exception):
+    pass
 
 # 認証
 load_dotenv()
@@ -32,6 +36,8 @@ def initialize():
 
 def collect_data(user_did = None, since = None, until = None):
     global count
+    if count >= limit:
+        raise ReachedLimit('リクエスト制限到達')
     # 検索クエリを設定
     p = {'q':'-http -@', 'lang':'ja', 'limit':100}
     if user_did != None:
@@ -78,6 +84,8 @@ def create_talk(json_filename):
         error_trees = pickle.load(f)
     # 各投稿について処理
     for post in data['posts']:
+        if count >= limit:
+            raise ReachedLimit('リクエスト制限到達')
         # 根を参照
         if post['record']['reply'] != None:
             root_uri = post['record']['reply']['root']['uri']
@@ -92,6 +100,7 @@ def create_talk(json_filename):
             res = client.get_post_thread(uri=root_uri, depth=1000)
             count += 1
         except Exception:
+            count += 1
             # 投稿が削除されている場合など何かしらエラーが返ってきたらスキップ
             with open(logfile, 'a') as f:
                 print('cause error in tree {}'.format(root_uri),file=f)
@@ -294,18 +303,18 @@ def main():
     global logfile
     logfile = 'log/'+datetime.datetime.now().strftime('%Y%m%d_%H%M%S')+'.txt'
     count = 0
-    size = 10
+    sizeTH = 10
     if not os.path.exists(inner_data_dir+'/searched_trees.txt'):
         initialize()
     filename = collect_data()
     create_talk(filename)
-    increase_data(size)
-    while count < 3000:
+    increase_data(sizeTH)
+    while count < limit:
         with open(filename, 'r') as f:
             oldest = json.load(f)['posts'][-1]['record']['created_at']
         filename = collect_data(until=oldest)
         create_talk(filename)
-        increase_data(size)
+        increase_data(sizeTH)
 
 if __name__ == "__main__":
     main()
