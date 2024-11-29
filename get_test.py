@@ -3,6 +3,7 @@ import json
 import os
 from dotenv import load_dotenv
 import datetime
+from atproto import exceptions
 
 # 認証
 load_dotenv()
@@ -10,7 +11,10 @@ client = Client()
 client.login('kanlight.bsky.social', os.environ.get("pswd"))
 
 # リクエスト
-res = client.get_post_thread(uri='at://did:plc:vgyuq3dqwcsyhs7nomxkguhh/app.bsky.feed.post/3laolw3jydc2h')
+try:
+    res = client.get_post_thread(uri='at://did:plc:aaytn2edne7zd3izb5dma3kb/app.bsky.feed.post/3kr43ddzvhw2h')
+except exceptions.BadRequestError as e:
+    print(e)
 thread = res.thread.model_dump_json()
 decoded_thread = json.loads(thread)
 

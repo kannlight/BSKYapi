@@ -68,7 +68,7 @@ def collect_data(user_did = None, since = None, until = None):
     for post in decoded_res['posts']:
         if post['embed'] != None:
             noises.append(post)
-        elif post['reply_count'] == 0 and post['record']['reply'] == None:
+        elif post['reply_count'] == 0 and (not 'reply' in post['record']) or post['record']['reply'] == None:
             noises.append(post)
         elif post['reply_count'] == 0 and post['record']['reply']['parent'] == post['record']['reply']['root']:
             noises.append(post)
@@ -122,8 +122,7 @@ def create_talk(json_filename):
                         time.sleep(2 ** attempt)  # リトライ前に指数的に待機
                     else:
                         raise e  # リトライ上限に達したら例外をスロー
-        except Exception as e:
-            print(e)
+        except exceptions.BadRequestError:
             # 投稿が削除されている場合など何かしらエラーが返ってきたらスキップ
             with open(logfile, 'a') as f:
                 print('cause error in tree {}'.format(root_uri),file=f)
