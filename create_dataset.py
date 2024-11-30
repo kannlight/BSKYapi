@@ -17,7 +17,7 @@ poor_data_dir = 'poor_data'
 logfile = 'log/logfile'
 count = 0
 limit = 3000
-MAX_RETRIES = 3
+MAX_RETRIES = 5
 
 class ReachedLimit(Exception):
     pass
@@ -338,7 +338,11 @@ def main():
     sizeTH = 10
     if not os.path.exists(inner_data_dir+'/searched_trees.txt'):
         initialize()
-    filename = collect_data()
+    outputs_collect = os.listdir(output_collect_dir)
+    if len(outputs_collect) > 0:
+        filename = output_collect_dir+'/'+sorted(outputs_collect)[-1]
+    else:
+        filename = collect_data()
     create_talk(filename)
     increase_data(sizeTH)
     while count < limit:

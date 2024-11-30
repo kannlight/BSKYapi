@@ -1,0 +1,69 @@
+{
+    "data": [
+        {
+            "talk": [
+                {
+                    "author": "did:plc:i3kz5pjtxzma2qkxjvzhql2i",
+                    "type": 1,
+                    "utter": "ありがとうございます😉来てくれたー！\n\nジェネレータを変えての新規作成（引越しという表現が近い？）だとどうなりますか？\n生成ジェネレータ毎にrkeyが変わるなら、別フィードという扱いになりそうだなあという推測をしてみました🙋‍♀️"
+                },
+                {
+                    "author": "did:plc:i3kz5pjtxzma2qkxjvzhql2i",
+                    "type": 1,
+                    "utter": "というか、前提が合っているか怪しいので\n追加質問！\n\nAで生成すると挙動が重い、Bで生成すると軽い、みたいなことはあり得ますか？"
+                },
+                {
+                    "author": "did:plc:64aqvld6on6kzrejzqha4w6j",
+                    "type": 2,
+                    "utter": "ジェネレータって何ですかね。SkyFeedとかのサービスのことですかね？\n\nカスタムフィードに関して言うと、アクセスがあった時に返すデータは「ポストのURLのリスト」だけなのですが、それをどうやって生成するのかはサーバ次第なので当然レスポンスが早いとか遅いとかいうのはあります。\n\nただ、カスタムフィードはそのレコードの中に「どのサーバにアクセスするのか？」という情報を持っているのでrkeyは同じで、アクセスする先の情報を別のサーバに切り替える形で元の情報を維持する事は理論的には可能です。なので、利用するサービスを切り替えても利用者からは気付かれずに実装を変える事は可能です。"
+                },
+                {
+                    "author": "did:plc:i3kz5pjtxzma2qkxjvzhql2i",
+                    "type": 3,
+                    "utter": "そう。skyfeedなどのサービスです。\nいただいた回答ですっきりしました。いつも通りわかりやすかったです🙌ありがとうございます！"
+                }
+            ],
+            "uri": "at://did:plc:i3kz5pjtxzma2qkxjvzhql2i/app.bsky.feed.post/3lbjsw3qwcc23"
+        },
+        {
+            "talk": [
+                {
+                    "author": "did:plc:i3kz5pjtxzma2qkxjvzhql2i",
+                    "type": 1,
+                    "utter": "そう。skyfeedなどのサービスです。\nいただいた回答ですっきりしました。いつも通りわかりやすかったです🙌ありがとうございます！"
+                },
+                {
+                    "author": "did:plc:64aqvld6on6kzrejzqha4w6j",
+                    "type": 2,
+                    "utter": "実験してみます？"
+                },
+                {
+                    "author": "did:plc:i3kz5pjtxzma2qkxjvzhql2i",
+                    "type": 3,
+                    "utter": "わあー！！！！！したいです！"
+                }
+            ],
+            "uri": "at://did:plc:i3kz5pjtxzma2qkxjvzhql2i/app.bsky.feed.post/3lbjt4zcz4c23"
+        },
+        {
+            "talk": [
+                {
+                    "author": "did:plc:i3kz5pjtxzma2qkxjvzhql2i",
+                    "type": 1,
+                    "utter": "わあー！！！！！したいです！"
+                },
+                {
+                    "author": "did:plc:64aqvld6on6kzrejzqha4w6j",
+                    "type": 2,
+                    "utter": "んじゃとりあえずskyfeedで何か適当にカスタムフィード作ってもらえますか？"
+                },
+                {
+                    "author": "did:plc:i3kz5pjtxzma2qkxjvzhql2i",
+                    "type": 3,
+                    "utter": "ちょうど「青空ディズニー部」がskyfeed製です！動きが非常によろしくないので、これを使っていただいてOKです🙆‍♀️"
+                }
+            ],
+            "uri": "at://did:plc:i3kz5pjtxzma2qkxjvzhql2i/app.bsky.feed.post/3lbjtgu66f223"
+        }
+    ]
+}

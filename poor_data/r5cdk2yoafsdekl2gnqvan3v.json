@@ -1,0 +1,69 @@
+{
+    "data": [
+        {
+            "talk": [
+                {
+                    "author": "did:plc:r5cdk2yoafsdekl2gnqvan3v",
+                    "type": 1,
+                    "utter": "Linuxは一時期気になったけど\n情報漁ってるうちに試す意欲が\n流れてお蔵入りになってたけど\n気になるならまた調べるなり書籍読むなりしてみるのも良さそうだな"
+                },
+                {
+                    "author": "did:plc:qmtx6wavyc5jhtul63xacq4s",
+                    "type": 2,
+                    "utter": "ゲイツ君のOSにだいぶ寄せてきてるので、体当たりでも使えるようになってますよ。\nただファイルシステムが違うので、データを保存するドライブはexFATかFAT32でフォーマットしておく（winndows機でやるほうが確実）と無難です。\nNTFSも使えますが、これをUSBでやるとちょっと不具合が出たり(;´Д`)\nあと落としてきたzipやrarファイルの解凍は、winndows機で行うと失敗しないとかあります（みんながwinndows機で圧縮するから）\nなんといってもソフトはみんなタダなのと、あのアップデート地獄がないのが素晴らしい(*´∀｀*)"
+                },
+                {
+                    "author": "did:plc:r5cdk2yoafsdekl2gnqvan3v",
+                    "type": 3,
+                    "utter": "な、何とフォロー外からありがとうございます！！\n\n体当たりでも使える様になってきていると聞いて驚いた反面ファイルシステムの違い故かフォーマットや圧縮ファイルの云々はWindows機でした方が良さそうですね。\n\n確かにアップデート地獄と\nソフトがタダなのはかなり大きい……"
+                }
+            ],
+            "uri": "at://did:plc:r5cdk2yoafsdekl2gnqvan3v/app.bsky.feed.post/3lc3odrzwlk24"
+        },
+        {
+            "talk": [
+                {
+                    "author": "did:plc:r5cdk2yoafsdekl2gnqvan3v",
+                    "type": 1,
+                    "utter": "な、何とフォロー外からありがとうございます！！\n\n体当たりでも使える様になってきていると聞いて驚いた反面ファイルシステムの違い故かフォーマットや圧縮ファイルの云々はWindows機でした方が良さそうですね。\n\n確かにアップデート地獄と\nソフトがタダなのはかなり大きい……"
+                },
+                {
+                    "author": "did:plc:qmtx6wavyc5jhtul63xacq4s",
+                    "type": 2,
+                    "utter": "ちなみにwindowsは捨てずに（OSだけのディスクがあるなら）、Cドライブを分割してインストールする手立て（デュアルブート）も使えますよ(*´∀｀*)ノ\nW10とかW11なら150Gもくれてやれば十分で、残りをLinuxに割り当てます。\n先にWindowsのディスク割当を設定からいじって減らして、空き領域にLinuxを後からインストールするのです。\nちなみにLinuxのインストールUSBを事前に作るのですが（rufusを使います）、なんとインストール前に試用でき、しかも元のPCを弄りたくなければ、USBドライブをLinuxのシステムドライブとして使うことも可能なのです (+･`ー´･)ﾄﾞﾔ"
+                },
+                {
+                    "author": "did:plc:qmtx6wavyc5jhtul63xacq4s",
+                    "type": 2,
+                    "utter": "そのUSBドライブですが、32GBでUSB3.1とか3.2のものを使うと動作も早く無難です。\nまた、とりあえずUSBドライブをシステムドライブにという場合は、別にUSBドライブを用意するのがこれまた無難。\n①インストール用は8GBあればOK、できればUSB3.0規格\n②システムドライブ用ならUSB3.2推奨\n③インストール時は、インストール先をよ〜〜〜く見ましょう。\n　 ドライブ間違うと(ﾉ∀`)ｱﾁｬｰになります。　\n　\nやり方は検索すれば出てきます。Windowsほど面倒でもないので\n心配はいりませんよ(*´∀｀*)"
+                },
+                {
+                    "author": "did:plc:r5cdk2yoafsdekl2gnqvan3v",
+                    "type": 3,
+                    "utter": "  成る程……これらの条件をもとに適切なUSBドライブを探しておかなくては\n\n丁寧な解説及び\n初心者が躓きやすいポイント\n注意事項を丁寧に纏めていただきありがとうございました！\nインストール用のドライブを探そう(◉ ◉)"
+                }
+            ],
+            "uri": "at://did:plc:r5cdk2yoafsdekl2gnqvan3v/app.bsky.feed.post/3lc3pwc6ahk24"
+        },
+        {
+            "talk": [
+                {
+                    "author": "did:plc:r5cdk2yoafsdekl2gnqvan3v",
+                    "type": 1,
+                    "utter": "アッ……(USBハブを付けないとコネクタが一つしかないタブレットPCなのを思い出した顔)\n\nUSB二本差しとは画像との相乗効果がすごいバフになりそうです"
+                },
+                {
+                    "author": "did:plc:qmtx6wavyc5jhtul63xacq4s",
+                    "type": 2,
+                    "utter": "＞コネクタが一つしかない\nそんなあなたにドッキングステーション(*´∀｀*)っ\n検索すれば、ちゃんとワンポート用に発売されてますよ👍"
+                },
+                {
+                    "author": "did:plc:r5cdk2yoafsdekl2gnqvan3v",
+                    "type": 3,
+                    "utter": "ありがとうございます！\nsurface用のものを持っているのを確認したのでとりあえず\n先程解説して頂いた条件のインストール用のUSBドライブ2種を検索します\n\n何となくそんなあなたにポプテピセラピーのノリを思い出したのはこぼれ話(U◕ ◕U)"
+                }
+            ],
+            "uri": "at://did:plc:r5cdk2yoafsdekl2gnqvan3v/app.bsky.feed.post/3lc3qrgf3ak2n"
+        }
+    ]
+}
