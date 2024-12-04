@@ -1,0 +1,44 @@
+{
+    "data": [
+        {
+            "talk": [
+                {
+                    "author": "did:plc:q3jopq5imjkocbqrnmxozm43",
+                    "type": 1,
+                    "utter": "It's... really not needed. If you've verified your domain, nobody can copy that, period. Anything else feels, well, silly.\n\nIf you're dead-seet on adding something, though, just do what Mastodon does for a second layer and call it a day. Your system is already fine."
+                },
+                {
+                    "author": "did:plc:rxe56c6rcyldnr7xhprpsgud",
+                    "type": 2,
+                    "utter": "Eh I'm wary of domain verification, there needs to be an extra step for \"security\""
+                },
+                {
+                    "author": "did:plc:q3jopq5imjkocbqrnmxozm43",
+                    "type": 3,
+                    "utter": "If someone can get into your domain registrar and change a CNAME record, you have bigger problems to deal with."
+                }
+            ],
+            "uri": "at://did:plc:q3jopq5imjkocbqrnmxozm43/app.bsky.feed.post/3lc4olcx2mc2m"
+        },
+        {
+            "talk": [
+                {
+                    "author": "did:plc:q3jopq5imjkocbqrnmxozm43",
+                    "type": 1,
+                    "utter": "If someone can get into your domain registrar and change a CNAME record, you have bigger problems to deal with."
+                },
+                {
+                    "author": "did:plc:55n4nhkcgvadrimff3myqvmw",
+                    "type": 2,
+                    "utter": "Seriously. If I lose control of my domain, I'm in *big* trouble on a *variety* of fronts."
+                },
+                {
+                    "author": "did:plc:q3jopq5imjkocbqrnmxozm43",
+                    "type": 3,
+                    "utter": "Yup. The domain is THE most secure way of doing this, because the only way you're losing that is somebody getting access to something that should be 1000% locked down. If they change that CNAME record, your URL's going to become a literal spam redirect within 10 minutes."
+                }
+            ],
+            "uri": "at://did:plc:q3jopq5imjkocbqrnmxozm43/app.bsky.feed.post/3lc4osqkbds2m"
+        }
+    ]
+}

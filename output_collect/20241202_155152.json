@@ -1,0 +1,476 @@
+{
+    "posts": [
+        {
+            "author": {
+                "did": "did:plc:gk7bsbqqvyrs73ieur7zhk43",
+                "handle": "sakumashiki.bsky.social",
+                "associated": {
+                    "chat": {
+                        "allow_incoming": "following",
+                        "py_type": "app.bsky.actor.defs#profileAssociatedChat"
+                    },
+                    "feedgens": null,
+                    "labeler": null,
+                    "lists": null,
+                    "starter_packs": null,
+                    "py_type": "app.bsky.actor.defs#profileAssociated"
+                },
+                "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:gk7bsbqqvyrs73ieur7zhk43/bafkreiexjsiej4vhtatldzyqshrd2lj65pd2sy3yu2mk5qq3mwmn43aine@jpeg",
+                "created_at": "2024-02-06T22:28:13.945Z",
+                "display_name": "\u3055\u304f\u307e\u3057\u304d",
+                "labels": [],
+                "viewer": {
+                    "blocked_by": false,
+                    "blocking": null,
+                    "blocking_by_list": null,
+                    "followed_by": null,
+                    "following": null,
+                    "known_followers": null,
+                    "muted": false,
+                    "muted_by_list": null,
+                    "py_type": "app.bsky.actor.defs#viewerState"
+                },
+                "py_type": "app.bsky.actor.defs#profileViewBasic"
+            },
+            "cid": "bafyreigcbqixt6qjy6djhubhkacbq4cpybwngmwpbc54wgmhkv3oijm4aq",
+            "indexed_at": "2024-11-29T14:20:19.558Z",
+            "record": {
+                "created_at": "2024-11-29T14:20:18.697Z",
+                "text": "\u80cc\u666f\u306b\u30cf\u30fc\u30c8\u304c\u63cf\u304b\u308c\u3066\u306a\u3044\u306e\u304c\u9006\u306b\u9055\u548c\u611f\u307e\u3067\u3042\u308b\u3060\u308d",
+                "embed": null,
+                "entities": null,
+                "facets": null,
+                "labels": null,
+                "langs": [
+                    "ja"
+                ],
+                "reply": {
+                    "parent": {
+                        "cid": "bafyreihn7sdxxldtfrexajxrp63sntwc2pleednvsq2lkity57nbujli4y",
+                        "uri": "at://did:plc:gk7bsbqqvyrs73ieur7zhk43/app.bsky.feed.post/3lc3rcuw2s22z",
+                        "py_type": "com.atproto.repo.strongRef"
+                    },
+                    "root": {
+                        "cid": "bafyreiagnmjh35c7g55jv72xsbyoqzyhaplkn3xy7cqnmf5linmdyxcmdq",
+                        "uri": "at://did:plc:gk7bsbqqvyrs73ieur7zhk43/app.bsky.feed.post/3lafm4d7kql2b",
+                        "py_type": "com.atproto.repo.strongRef"
+                    },
+                    "py_type": "app.bsky.feed.post#replyRef"
+                },
+                "tags": null,
+                "py_type": "app.bsky.feed.post"
+            },
+            "uri": "at://did:plc:gk7bsbqqvyrs73ieur7zhk43/app.bsky.feed.post/3lc3rmzzmu22z",
+            "embed": null,
+            "labels": [],
+            "like_count": 0,
+            "quote_count": 0,
+            "reply_count": 1,
+            "repost_count": 0,
+            "threadgate": null,
+            "viewer": {
+                "embedding_disabled": false,
+                "like": null,
+                "pinned": null,
+                "reply_disabled": null,
+                "repost": null,
+                "thread_muted": false,
+                "py_type": "app.bsky.feed.defs#viewerState"
+            },
+            "py_type": "app.bsky.feed.defs#postView"
+        },
+        {
+            "author": {
+                "did": "did:plc:t7xzcfaexzjlotjmxr6wx4el",
+                "handle": "run0.bsky.social",
+                "associated": {
+                    "chat": {
+                        "allow_incoming": "following",
+                        "py_type": "app.bsky.actor.defs#profileAssociatedChat"
+                    },
+                    "feedgens": null,
+                    "labeler": null,
+                    "lists": null,
+                    "starter_packs": null,
+                    "py_type": "app.bsky.actor.defs#profileAssociated"
+                },
+                "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:t7xzcfaexzjlotjmxr6wx4el/bafkreigayr72pgz4mrp3ihxf4zjr4dc7zpw6dlzfj4nvyms44vocezycrq@jpeg",
+                "created_at": "2023-12-20T10:35:34.591Z",
+                "display_name": "\ud804\udc4d\ud80c\udff8\ud80c\ude12",
+                "labels": [
+                    {
+                        "cts": "1970-01-01T00:00:00.000Z",
+                        "src": "did:plc:t7xzcfaexzjlotjmxr6wx4el",
+                        "uri": "at://did:plc:t7xzcfaexzjlotjmxr6wx4el/app.bsky.actor.profile/self",
+                        "val": "!no-unauthenticated",
+                        "cid": "bafyreico67jlvsgxprhhqrz5qmiucwe4s6yuspfsl6v3mvy6xlpifgk26a",
+                        "exp": null,
+                        "neg": null,
+                        "sig": null,
+                        "ver": null,
+                        "py_type": "com.atproto.label.defs#label"
+                    }
+                ],
+                "viewer": {
+                    "blocked_by": false,
+                    "blocking": null,
+                    "blocking_by_list": null,
+                    "followed_by": null,
+                    "following": null,
+                    "known_followers": null,
+                    "muted": false,
+                    "muted_by_list": null,
+                    "py_type": "app.bsky.actor.defs#viewerState"
+                },
+                "py_type": "app.bsky.actor.defs#profileViewBasic"
+            },
+            "cid": "bafyreihikch7j5vpcknytv4cojmm3u6akoju2sxy7mrorrybe6hwiois5y",
+            "indexed_at": "2024-11-29T14:20:19.549Z",
+            "record": {
+                "created_at": "2024-11-29T14:20:18.337Z",
+                "text": "\u3061\u3087\u3063\u3068\u3001\u63a2\u3057\u3066\u307f\u307e\u3059\u2026\u2026\uff01\ud83e\udd70\ud83d\udc95\ud83d\udc95\n\u307f\u3093\u306a\u304c\u671b\u9060\u697d\u3057\u3044\u3088\u3063\u3066\u6559\u3048\u3066\u304f\u308c\u308b\u306e\u3067\u3059\u3054\u3044\u6c17\u306b\u306a\u3063\u3061\u3083\u3063\u305f\u306e\u3067\ud83e\udd70\ud83d\udc95\u3068\u304a\u308b\u3055\u3093\u3082\u5206\u304b\u308a\u3084\u3059\u304f\u6559\u3048\u3066\u304f\u3060\u3055\u308a\u307e\u3057\u305f\u3057\u2026\u2026\uff01\ud83d\ude4f\n\uff01\uff1f\uff01\uff01\uff1f\u3068\u304a\u308b\u3055\u3093\u304c\u30bb\u30f3\u30b9\u306a\u3044\u306f\u7d76\u5bfe\u30c0\u30a6\u30c8\u3067\u3059\u3088\u2026\uff01\uff1f\uff01\u30bb\u30f3\u30b9\u7d76\u5bfe\u9b3c\u3042\u308b\u3068\u601d\u3044\u307e\u3059\u2026\uff01\u3044\u3064\u3082\u304a\u3057\u3083\u3057\u3093\u3059\u3054\u3044\u7d20\u6575\u3067\u3059\u3082\u3093\u2026\u2026\uff01\uff01\uff01\uff01",
+                "embed": null,
+                "entities": null,
+                "facets": null,
+                "labels": null,
+                "langs": [
+                    "ja"
+                ],
+                "reply": {
+                    "parent": {
+                        "cid": "bafyreieg6n5twqzi4b3qjgf26qq5ocem4rtkm3uwt32sj52lpep4hhw2ji",
+                        "uri": "at://did:plc:rs7eybklf6op5frak2a33ipi/app.bsky.feed.post/3lc3ratb2ek2r",
+                        "py_type": "com.atproto.repo.strongRef"
+                    },
+                    "root": {
+                        "cid": "bafyreiflmuc5hryvsqqwnghpiw6uacsdyqxlfhvxhghlkufdftiqmpsyra",
+                        "uri": "at://did:plc:t7xzcfaexzjlotjmxr6wx4el/app.bsky.feed.post/3lc2viyuj5s2u",
+                        "py_type": "com.atproto.repo.strongRef"
+                    },
+                    "py_type": "app.bsky.feed.post#replyRef"
+                },
+                "tags": null,
+                "py_type": "app.bsky.feed.post"
+            },
+            "uri": "at://did:plc:t7xzcfaexzjlotjmxr6wx4el/app.bsky.feed.post/3lc3rmzonc22w",
+            "embed": null,
+            "labels": [],
+            "like_count": 0,
+            "quote_count": 0,
+            "reply_count": 1,
+            "repost_count": 0,
+            "threadgate": null,
+            "viewer": {
+                "embedding_disabled": false,
+                "like": null,
+                "pinned": null,
+                "reply_disabled": null,
+                "repost": null,
+                "thread_muted": false,
+                "py_type": "app.bsky.feed.defs#viewerState"
+            },
+            "py_type": "app.bsky.feed.defs#postView"
+        },
+        {
+            "author": {
+                "did": "did:plc:x2z6vifgivpdggtzn6ohnxa4",
+                "handle": "azuki0104.bsky.social",
+                "associated": null,
+                "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:x2z6vifgivpdggtzn6ohnxa4/bafkreigipnk22ufnrnzt3lces4c6g5bqlxfla2r3ai2o2qdjmqs3dphpmm@jpeg",
+                "created_at": "2024-10-17T08:44:26.809Z",
+                "display_name": "\u3042\u305a\u304d\ud83d\udc3e",
+                "labels": [],
+                "viewer": {
+                    "blocked_by": false,
+                    "blocking": null,
+                    "blocking_by_list": null,
+                    "followed_by": null,
+                    "following": null,
+                    "known_followers": null,
+                    "muted": false,
+                    "muted_by_list": null,
+                    "py_type": "app.bsky.actor.defs#viewerState"
+                },
+                "py_type": "app.bsky.actor.defs#profileViewBasic"
+            },
+            "cid": "bafyreihe4p25rysu7prtqyjslf4dsq5dnp5ldedg2u2tmxi337etc5byxi",
+            "indexed_at": "2024-11-29T14:20:18.762Z",
+            "record": {
+                "created_at": "2024-11-29T14:20:17.845Z",
+                "text": "\u307b\u3093\u3068\u56f0\u3063\u305f\ud83d\ude25\n\u4f11\u307e\u305b\u3066\u308b\u57a2\u3042\u308b\u304b\u3089\u305d\u3063\u3061\u306e\u57a2\u4f7f\u3063\u3066\u3084\u308a\u76f4\u305d\u3046\u304b\u306a\uff1f\u60a9\u3080\u308f\u2026\ud83d\ude25",
+                "embed": null,
+                "entities": null,
+                "facets": null,
+                "labels": null,
+                "langs": [
+                    "ja"
+                ],
+                "reply": {
+                    "parent": {
+                        "cid": "bafyreifb3aakay3iuhpz7gozt5q7xupda3p74wej5svq7qqvhy42a45vcy",
+                        "uri": "at://did:plc:xfv4gw6kexcfcos2shrhkn6u/app.bsky.feed.post/3lc3rjnwans2g",
+                        "py_type": "com.atproto.repo.strongRef"
+                    },
+                    "root": {
+                        "cid": "bafyreifdav3vrpcv2nnx4swhmb4msmfmv4weowaagay27n2kjidyiblztm",
+                        "uri": "at://did:plc:x2z6vifgivpdggtzn6ohnxa4/app.bsky.feed.post/3lc3g23vxrs25",
+                        "py_type": "com.atproto.repo.strongRef"
+                    },
+                    "py_type": "app.bsky.feed.post#replyRef"
+                },
+                "tags": null,
+                "py_type": "app.bsky.feed.post"
+            },
+            "uri": "at://did:plc:x2z6vifgivpdggtzn6ohnxa4/app.bsky.feed.post/3lc3rmz7mt226",
+            "embed": null,
+            "labels": [],
+            "like_count": 1,
+            "quote_count": 0,
+            "reply_count": 1,
+            "repost_count": 0,
+            "threadgate": null,
+            "viewer": {
+                "embedding_disabled": false,
+                "like": null,
+                "pinned": null,
+                "reply_disabled": null,
+                "repost": null,
+                "thread_muted": false,
+                "py_type": "app.bsky.feed.defs#viewerState"
+            },
+            "py_type": "app.bsky.feed.defs#postView"
+        },
+        {
+            "author": {
+                "did": "did:plc:dprgoz3cphfvgsph2hhmk45p",
+                "handle": "naifutopai.bsky.social",
+                "associated": null,
+                "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:dprgoz3cphfvgsph2hhmk45p/bafkreifg6hqvjgcnjsjcfcryssy7n5qdffmtp3brgu5bux5qrnichaan2m@jpeg",
+                "created_at": "2024-10-17T04:16:44.107Z",
+                "display_name": "\u30ca\u30a4\u30d5\u3068\u30d1\u30a4\ud83d\udd2a\ud83e\udd67(\u5922\u57a2)",
+                "labels": [],
+                "viewer": {
+                    "blocked_by": false,
+                    "blocking": null,
+                    "blocking_by_list": null,
+                    "followed_by": null,
+                    "following": null,
+                    "known_followers": null,
+                    "muted": false,
+                    "muted_by_list": null,
+                    "py_type": "app.bsky.actor.defs#viewerState"
+                },
+                "py_type": "app.bsky.actor.defs#profileViewBasic"
+            },
+            "cid": "bafyreigjujkqygmfinveufgsoyhxzsife3jwwtvrqslrzgs3jv5dadpxwe",
+            "indexed_at": "2024-11-29T14:20:16.851Z",
+            "record": {
+                "created_at": "2024-11-29T14:20:15.418Z",
+                "text": "\u5206\u304b\u308b\u301c!!\u3042\u3068\u72ec\u5360\u6b32\u3068\u304b\u5ac9\u59ac\u5fc3\u304c\u9650\u754c\u7a81\u7834\u3057\u3066\u81ea\u50b7\u884c\u70ba\u3057\u3061\u3083\u3046\uff7c\uff9e\uff6a\uff72\uff84\uff9e\u541b\u3082\u3044\u305d\u3046\u3060\u306a\u3041\u3063\u3066\uff01\u7121\u610f\u8b58\u306b\u722a\u3092\u30ac\u30ea\u30ac\u30ea\u565b\u3093\u3067\u8840\u307e\u307f\u308c\u306b\u306a\u3063\u3066\u305d\u3046\u3067\u3059\u3088\u306d\u3047\u301c!!\u263a\ufe0f\ud83d\udc4d",
+                "embed": null,
+                "entities": null,
+                "facets": null,
+                "labels": null,
+                "langs": [
+                    "ja"
+                ],
+                "reply": {
+                    "parent": {
+                        "cid": "bafyreifiwy2wsszzio6shciug7yh6ezd3ufpoebfea6ww35xhe7cpsjfqe",
+                        "uri": "at://did:plc:je6eo6pmfcst2dyenlw7tz32/app.bsky.feed.post/3lc3nrlsfm22g",
+                        "py_type": "com.atproto.repo.strongRef"
+                    },
+                    "root": {
+                        "cid": "bafyreibshe4a6pc5abaazsleihimiaoty5emtp6muii5pegtrid5hehqym",
+                        "uri": "at://did:plc:je6eo6pmfcst2dyenlw7tz32/app.bsky.feed.post/3lc3jueqvrs2h",
+                        "py_type": "com.atproto.repo.strongRef"
+                    },
+                    "py_type": "app.bsky.feed.post#replyRef"
+                },
+                "tags": null,
+                "py_type": "app.bsky.feed.post"
+            },
+            "uri": "at://did:plc:dprgoz3cphfvgsph2hhmk45p/app.bsky.feed.post/3lc3rmwvnn22x",
+            "embed": null,
+            "labels": [],
+            "like_count": 1,
+            "quote_count": 0,
+            "reply_count": 0,
+            "repost_count": 0,
+            "threadgate": null,
+            "viewer": {
+                "embedding_disabled": false,
+                "like": null,
+                "pinned": null,
+                "reply_disabled": null,
+                "repost": null,
+                "thread_muted": false,
+                "py_type": "app.bsky.feed.defs#viewerState"
+            },
+            "py_type": "app.bsky.feed.defs#postView"
+        },
+        {
+            "author": {
+                "did": "did:plc:6u6rvs3zkud77ocke37lvktq",
+                "handle": "ameconco.bsky.social",
+                "associated": null,
+                "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:6u6rvs3zkud77ocke37lvktq/bafkreihiuvgx2p3amirr75a435hl4lw2reo5l73ncuqcvlda6xroinos5u@jpeg",
+                "created_at": "2024-02-07T14:45:01.249Z",
+                "display_name": "\u6885\u96e8",
+                "labels": [],
+                "viewer": {
+                    "blocked_by": false,
+                    "blocking": null,
+                    "blocking_by_list": null,
+                    "followed_by": null,
+                    "following": null,
+                    "known_followers": null,
+                    "muted": false,
+                    "muted_by_list": null,
+                    "py_type": "app.bsky.actor.defs#viewerState"
+                },
+                "py_type": "app.bsky.actor.defs#profileViewBasic"
+            },
+            "cid": "bafyreidyivewzowjh7p7ofxub25wscsxuie5cqefmvt7xtryevaornub3q",
+            "indexed_at": "2024-11-29T14:20:16.450Z",
+            "record": {
+                "created_at": "2024-11-29T14:20:15.382Z",
+                "text": "\u3084\u3001\u30df\u30cd\u30ea\u30a2\u306e\u3053\u306e\u53cd\u5fdc\u3092\u4e0a\u624b\u306b\u6587\u7ae0\u5316\u3067\u304d\u306a\u304f\u3066\u2026\u2026(\u6587\u5b57\u66f8\u304d\u3068\u3057\u3066\u5931\u683c)\n\u6025\u304e\u76ee\u3067\u3055\u304b\u3055\u304b\u63cf\u3044\u3066\u307f\u305f",
+                "embed": null,
+                "entities": null,
+                "facets": null,
+                "labels": null,
+                "langs": [
+                    "ja"
+                ],
+                "reply": {
+                    "parent": {
+                        "cid": "bafyreigw272oas7ynxuja3w6hmte3vv7oc4476swgvtk6xg2uyaav5l5ue",
+                        "uri": "at://did:plc:kewe5u42xqztpsjmlyvfza6v/app.bsky.feed.post/3lc3rinumds2j",
+                        "py_type": "com.atproto.repo.strongRef"
+                    },
+                    "root": {
+                        "cid": "bafyreiao6qxjusvxmdbb5zwpxzix4k7vnudymvfkmddiafs64paw7eh4xa",
+                        "uri": "at://did:plc:6u6rvs3zkud77ocke37lvktq/app.bsky.feed.post/3lc3kjl3ea22q",
+                        "py_type": "com.atproto.repo.strongRef"
+                    },
+                    "py_type": "app.bsky.feed.post#replyRef"
+                },
+                "tags": null,
+                "py_type": "app.bsky.feed.post"
+            },
+            "uri": "at://did:plc:6u6rvs3zkud77ocke37lvktq/app.bsky.feed.post/3lc3rmwuhkc2o",
+            "embed": null,
+            "labels": [],
+            "like_count": 1,
+            "quote_count": 0,
+            "reply_count": 1,
+            "repost_count": 0,
+            "threadgate": null,
+            "viewer": {
+                "embedding_disabled": false,
+                "like": null,
+                "pinned": null,
+                "reply_disabled": null,
+                "repost": null,
+                "thread_muted": false,
+                "py_type": "app.bsky.feed.defs#viewerState"
+            },
+            "py_type": "app.bsky.feed.defs#postView"
+        },
+        {
+            "author": {
+                "did": "did:plc:panotegualx3gykiilw7ue2e",
+                "handle": "hakuno819.bsky.social",
+                "associated": {
+                    "chat": {
+                        "allow_incoming": "following",
+                        "py_type": "app.bsky.actor.defs#profileAssociatedChat"
+                    },
+                    "feedgens": null,
+                    "labeler": null,
+                    "lists": null,
+                    "starter_packs": null,
+                    "py_type": "app.bsky.actor.defs#profileAssociated"
+                },
+                "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:panotegualx3gykiilw7ue2e/bafkreigqlpydvuxqfnneueome2pkz6r3kywqpadzht6iytxiuxfhp5soce@jpeg",
+                "created_at": "2024-08-07T10:55:34.473Z",
+                "display_name": "\u767d\u91ce",
+                "labels": [
+                    {
+                        "cts": "2024-08-07T10:55:31.051Z",
+                        "src": "did:plc:panotegualx3gykiilw7ue2e",
+                        "uri": "at://did:plc:panotegualx3gykiilw7ue2e/app.bsky.actor.profile/self",
+                        "val": "!no-unauthenticated",
+                        "cid": "bafyreifygigzy5todp5uranfhc2s7en35unulohmlmixb2kqyfbdyrdbpq",
+                        "exp": null,
+                        "neg": null,
+                        "sig": null,
+                        "ver": null,
+                        "py_type": "com.atproto.label.defs#label"
+                    }
+                ],
+                "viewer": {
+                    "blocked_by": false,
+                    "blocking": null,
+                    "blocking_by_list": null,
+                    "followed_by": null,
+                    "following": null,
+                    "known_followers": null,
+                    "muted": false,
+                    "muted_by_list": null,
+                    "py_type": "app.bsky.actor.defs#viewerState"
+                },
+                "py_type": "app.bsky.actor.defs#profileViewBasic"
+            },
+            "cid": "bafyreielkm6eoklqaxy6y5bzbgaduncgh7ybm6wvt25kfo6kligfo6hvw4",
+            "indexed_at": "2024-11-29T14:20:15.955Z",
+            "record": {
+                "created_at": "2024-11-29T14:20:14.724Z",
+                "text": "\u3042\u308a\u304c\u3068\u3046\u3054\u3056\u3044\u307e\u3059\ud83e\udd7a\u2728\n\u3081\u3061\u3083\u304f\u3061\u3083\u697d\u3057\u307f\u306b\u3057\u3066\u308b\u306e\u3067\uff01\uff01\n\u3044\u3044\u4e8b\u3044\u3063\u3071\u3044\u3042\u308a\u307e\u3059\u304b\u3089\uff01\u751f\u304d\u307e\u3057\u3087\ud83d\udc4d",
+                "embed": null,
+                "entities": null,
+                "facets": null,
+                "labels": null,
+                "langs": [
+                    "ja"
+                ],
+                "reply": {
+                    "parent": {
+                        "cid": "bafyreidwebcqauwapu6uofznkwtuyvboc35dhm33oypr3vjvwnv2nuy2fi",
+                        "uri": "at://did:plc:stfuphukb4kb64g44sfzpjgo/app.bsky.feed.post/3lc27z5czw22d",
+                        "py_type": "com.atproto.repo.strongRef"
+                    },
+                    "root": {
+                        "cid": "bafyreiazp6jtibcnkai5qp7zcdajzchrhisz22nww3dcol5ax3oxmx3qrm",
+                        "uri": "at://did:plc:stfuphukb4kb64g44sfzpjgo/app.bsky.feed.post/3lbwizxdqhc2k",
+                        "py_type": "com.atproto.repo.strongRef"
+                    },
+                    "py_type": "app.bsky.feed.post#replyRef"
+                },
+                "tags": null,
+                "py_type": "app.bsky.feed.post"
+            },
+            "uri": "at://did:plc:panotegualx3gykiilw7ue2e/app.bsky.feed.post/3lc3rmwaexs2k",
+            "embed": null,
+            "labels": [],
+            "like_count": 1,
+            "quote_count": 0,
+            "reply_count": 0,
+            "repost_count": 0,
+            "threadgate": null,
+            "viewer": {
+                "embedding_disabled": false,
+                "like": null,
+                "pinned": null,
+                "reply_disabled": null,
+                "repost": null,
+                "thread_muted": false,
+                "py_type": "app.bsky.feed.defs#viewerState"
+            },
+            "py_type": "app.bsky.feed.defs#postView"
+        }
+    ],
+    "cursor": "100",
+    "hits_total": null
+}
