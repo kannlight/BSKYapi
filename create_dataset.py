@@ -259,17 +259,17 @@ def check_talk(array, head, i):
 #     print(count)  
 
 def merge_data(target_f,adder_f):
-    # 完成したデータを書き込む
-        target_data = {'data':[]}
-        adder_data = {'data':[]}
-        with open(target_f, 'r') as f:
-            target_data = json.load(f)
-        with open(adder_f, 'r') as f:
-            adder_data = json.load(f)
-        target_data['data'] += adder_data['data']
-        with open(target_f, 'w') as f:
-            json.dump(target_data, f, indent=4, ensure_ascii=False)
-        os.remove(adder_f)
+    # target_fにadder_fの対話データをマージして消去
+    target_data = {'data':[]}
+    adder_data = {'data':[]}
+    with open(target_f, 'r') as f:
+        target_data = json.load(f)
+    with open(adder_f, 'r') as f:
+        adder_data = json.load(f)
+    target_data['data'] += adder_data['data']
+    with open(target_f, 'w') as f:
+        json.dump(target_data, f, indent=4, ensure_ascii=False)
+    os.remove(adder_f)
 
 def increase_data(size_TH):
     for someone_file in os.listdir(creating_data_dir):
