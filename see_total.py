@@ -27,5 +27,15 @@ def print_statics(dir):
     print('  pvar: {}'.format(pvar))
     print('  pstd: {}'.format(math.sqrt(pvar)))
 
+def count_upper(dir, border):
+    data_num_info = []
+    for file in os.listdir(dir):
+        with open(dir+'/'+file, 'r', encoding='utf-8') as f:
+            data_num_info.append(len(json.load(f)['data']))
+    
+    print('more than {} in {}: {}'.format(border, dir, sum([i >= border for i in data_num_info])))
+
 if __name__ == "__main__":
     print_statics(data_dir)
+    border = 8
+    count_upper(poor_data_dir, border)
