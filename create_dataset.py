@@ -39,13 +39,13 @@ for attempt in range(MAX_RETRIES):
 def initialize():
     # 以下３つの変数はpickleで保存して管理している。これらを初期化するための関数
     searched_trees = set()
-    with open(inner_data_dir+'/searched_trees.txt','xb', encoding='utf-8') as f:
+    with open(inner_data_dir+'/searched_trees.txt','xb') as f:
         pickle.dump(searched_trees, f)
     error_trees = set()
-    with open(inner_data_dir+'/error_trees.txt','xb', encoding='utf-8') as f:
+    with open(inner_data_dir+'/error_trees.txt','xb') as f:
         pickle.dump(error_trees, f)
     searched_talks = set()
-    with open(inner_data_dir+'/searched_talks.txt','xb', encoding='utf-8') as f:
+    with open(inner_data_dir+'/searched_talks.txt','xb') as f:
         pickle.dump(searched_talks, f)
 
 def collect_data(user_did = None, since = None, until = None):
@@ -104,10 +104,10 @@ def create_talk(json_filename):
         data = json.load(f)
     # 探索済みの木の集合を読み込み
     searched_trees = set()
-    with open(inner_data_dir+'/searched_trees.txt','rb', encoding='utf-8') as f:
+    with open(inner_data_dir+'/searched_trees.txt','rb') as f:
         searched_trees = pickle.load(f)
     error_trees = set()
-    with open(inner_data_dir+'/error_trees.txt','rb', encoding='utf-8') as f:
+    with open(inner_data_dir+'/error_trees.txt','rb') as f:
         error_trees = pickle.load(f)
     # 各投稿について処理
     for post in data['posts']:
@@ -139,7 +139,7 @@ def create_talk(json_filename):
             with open(logfile, 'a', encoding='utf-8') as f:
                 print('cause error in tree {}'.format(root_uri),file=f)
             error_trees.add(root_uri)
-            with open(inner_data_dir+'/error_trees.txt','wb', encoding='utf-8') as f:
+            with open(inner_data_dir+'/error_trees.txt','wb') as f:
                 pickle.dump(error_trees, f)
             continue
         thread = res.thread.model_dump_json()
@@ -154,7 +154,7 @@ def create_talk(json_filename):
         # 探索済みの木にこの木を追加
         searched_trees.add(root_uri)
         # 探索済みの木の集合を保存
-        with open(inner_data_dir+'/searched_trees.txt','wb', encoding='utf-8') as f:
+        with open(inner_data_dir+'/searched_trees.txt','wb') as f:
             pickle.dump(searched_trees, f)
 
 def tree_to_array(tree):
@@ -179,7 +179,7 @@ def extract_talk_from_array(array):
     # 配列として与えられた発話の列から対話データを生成する関数
     # 探索済みの対話の集合を読み込み
     searched_talks = set()
-    with open(inner_data_dir+'/searched_talks.txt','rb', encoding='utf-8') as f:
+    with open(inner_data_dir+'/searched_talks.txt','rb') as f:
         searched_talks = pickle.load(f)
     # 作成済みの受信者の集合を読み込み
     created_files = os.listdir(data_dir)
@@ -240,7 +240,7 @@ def extract_talk_from_array(array):
         # 探索済みの対話にこの対話を追加
         searched_talks.add(end_uri)
         # 探索済みの対話の集合を保存
-        with open(inner_data_dir+'/searched_talks.txt','wb', encoding='utf-8') as f:
+        with open(inner_data_dir+'/searched_talks.txt','wb') as f:
             pickle.dump(searched_talks, f)
         # headをずらして繰り返し
         head = next_head
