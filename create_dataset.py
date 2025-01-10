@@ -393,8 +393,7 @@ def automate_main(loop_count):
             main()
         except ReachedLimit as e:
             print(e)
-        elapsed = time.time() + start
-        # 300s間隔で良いはずだが、60sゆとりを持たせている
+        elapsed = time.time() - start
         sleeptime = 360 - elapsed
         if sleeptime > 0:
             time.sleep(sleeptime)
