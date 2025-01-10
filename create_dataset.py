@@ -7,6 +7,7 @@ import datetime
 import pickle
 import shutil
 import time
+import sys
 
 inner_data_dir = 'inner_data' # プログラム内部で使う変数をまとめたフォルダ
 output_collect_dir = 'output_collect' # 収集したデータを記録するフォルダ
@@ -385,5 +386,21 @@ def main():
         create_talk(filename)
         increase_data(sizeTH)
 
+def automate_main(loop_count):
+    while loop_count > 0:
+        start = time.time()
+        try:
+            main()
+        except ReachedLimit as e:
+            print(e)
+        elapsed = time.time() + start
+        sleeptime = 300 - elapsed
+        if sleeptime > 0:
+            time.sleep(sleeptime)
+        loop_count -= 1
+
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 1:
+        automate_main(int(sys.argv[1]))
+    else:
+        main()
