@@ -359,7 +359,7 @@ def main():
     # リクエスト回数をリセット
     count = 0
     # 最低対話数を設定
-    sizeTH = 10
+    sizeTH = 8
     # 初めて実行する場合は初期化が必要
     if not os.path.exists(inner_data_dir+'/searched_trees.txt'):
         initialize()

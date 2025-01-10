@@ -37,5 +37,5 @@ def count_upper(dir, border):
 
 if __name__ == "__main__":
     print_statics(data_dir)
-    border = 8
-    count_upper(poor_data_dir, border)
+    # border = 8
+    # count_upper(poor_data_dir, border)
