@@ -39,13 +39,13 @@ for attempt in range(MAX_RETRIES):
 def initialize():
     # 以下３つの変数はpickleで保存して管理している。これらを初期化するための関数
     searched_trees = set()
-    with open(inner_data_dir+'/searched_trees.txt','xb') as f:
+    with open(inner_data_dir+'/searched_trees.txt','xb', encoding='utf-8') as f:
         pickle.dump(searched_trees, f)
     error_trees = set()
-    with open(inner_data_dir+'/error_trees.txt','xb') as f:
+    with open(inner_data_dir+'/error_trees.txt','xb', encoding='utf-8') as f:
         pickle.dump(error_trees, f)
     searched_talks = set()
-    with open(inner_data_dir+'/searched_talks.txt','xb') as f:
+    with open(inner_data_dir+'/searched_talks.txt','xb', encoding='utf-8') as f:
         pickle.dump(searched_talks, f)
 
 def collect_data(user_did = None, since = None, until = None):
@@ -91,7 +91,7 @@ def collect_data(user_did = None, since = None, until = None):
         filename = output_collect_dir+'/'+datetime.datetime.now().strftime('%Y%m%d_%H%M%S')+'.json'
     else:
         filename = output_collect_author_dir+'/'+datetime.datetime.now().strftime('%Y%m%d_%H%M%S')+'.json'
-    with open(filename, 'w') as f:
+    with open(filename, 'w', encoding='utf-8') as f:
         json.dump(decoded_res, f, indent=4)
     return filename
 
@@ -100,14 +100,14 @@ def create_talk(json_filename):
     global count
     # ファイルから投稿データを読み込み
     data = {}
-    with open(json_filename, 'r') as f:
+    with open(json_filename, 'r', encoding='utf-8') as f:
         data = json.load(f)
     # 探索済みの木の集合を読み込み
     searched_trees = set()
-    with open(inner_data_dir+'/searched_trees.txt','rb') as f:
+    with open(inner_data_dir+'/searched_trees.txt','rb', encoding='utf-8') as f:
         searched_trees = pickle.load(f)
     error_trees = set()
-    with open(inner_data_dir+'/error_trees.txt','rb') as f:
+    with open(inner_data_dir+'/error_trees.txt','rb', encoding='utf-8') as f:
         error_trees = pickle.load(f)
     # 各投稿について処理
     for post in data['posts']:
@@ -136,10 +136,10 @@ def create_talk(json_filename):
                         raise e  # リトライ上限に達したら例外をスロー
         except exceptions.BadRequestError:
             # 投稿が削除されている場合など何かしらエラーが返ってきたらスキップ
-            with open(logfile, 'a') as f:
+            with open(logfile, 'a', encoding='utf-8') as f:
                 print('cause error in tree {}'.format(root_uri),file=f)
             error_trees.add(root_uri)
-            with open(inner_data_dir+'/error_trees.txt','wb') as f:
+            with open(inner_data_dir+'/error_trees.txt','wb', encoding='utf-8') as f:
                 pickle.dump(error_trees, f)
             continue
         thread = res.thread.model_dump_json()
@@ -154,7 +154,7 @@ def create_talk(json_filename):
         # 探索済みの木にこの木を追加
         searched_trees.add(root_uri)
         # 探索済みの木の集合を保存
-        with open(inner_data_dir+'/searched_trees.txt','wb') as f:
+        with open(inner_data_dir+'/searched_trees.txt','wb', encoding='utf-8') as f:
             pickle.dump(searched_trees, f)
 
 def tree_to_array(tree):
@@ -179,7 +179,7 @@ def extract_talk_from_array(array):
     # 配列として与えられた発話の列から対話データを生成する関数
     # 探索済みの対話の集合を読み込み
     searched_talks = set()
-    with open(inner_data_dir+'/searched_talks.txt','rb') as f:
+    with open(inner_data_dir+'/searched_talks.txt','rb', encoding='utf-8') as f:
         searched_talks = pickle.load(f)
     # 作成済みの受信者の集合を読み込み
     created_files = os.listdir(data_dir)
@@ -232,15 +232,15 @@ def extract_talk_from_array(array):
         filename = creating_data_dir+'/'+recept_did.replace('did:plc:', '')+'.json'
         data = {'data':[]}
         if os.path.exists(filename):
-            with open(filename, 'r') as f:
+            with open(filename, 'r', encoding='utf-8') as f:
                 data = json.load(f)
         data['data'].append(talk_data)
-        with open(filename, 'w') as f:
+        with open(filename, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=4,ensure_ascii=False)
         # 探索済みの対話にこの対話を追加
         searched_talks.add(end_uri)
         # 探索済みの対話の集合を保存
-        with open(inner_data_dir+'/searched_talks.txt','wb') as f:
+        with open(inner_data_dir+'/searched_talks.txt','wb', encoding='utf-8') as f:
             pickle.dump(searched_talks, f)
         # headをずらして繰り返し
         head = next_head
@@ -268,12 +268,12 @@ def merge_data(target_f,adder_f):
     # target_fにadder_fの対話データをマージして消去する関数
     target_data = {'data':[]}
     adder_data = {'data':[]}
-    with open(target_f, 'r') as f:
+    with open(target_f, 'r', encoding='utf-8') as f:
         target_data = json.load(f)
-    with open(adder_f, 'r') as f:
+    with open(adder_f, 'r', encoding='utf-8') as f:
         adder_data = json.load(f)
     target_data['data'] += adder_data['data']
-    with open(target_f, 'w') as f:
+    with open(target_f, 'w', encoding='utf-8') as f:
         json.dump(target_data, f, indent=4, ensure_ascii=False)
     os.remove(adder_f)
 
@@ -281,12 +281,12 @@ def increase_data(size_TH):
     # 生成した対話データから、size_THを超えるように対話データを増やし、データを完成させる関数
     # 作成中の対話データを順に処理
     for someone_file in os.listdir(creating_data_dir):
-        with open(logfile, 'a') as f:
+        with open(logfile, 'a', encoding='utf-8') as f:
             print('request {} times'.format(count),file=f)
             print(someone_file,file=f)
         # 対話数がsize_THを満たすか確認
         size = size_TH
-        with open(creating_data_dir+'/'+someone_file, 'r') as f:
+        with open(creating_data_dir+'/'+someone_file, 'r', encoding='utf-8') as f:
             size = len(json.load(f)['data'])
         last_time = None
         while size < size_TH:
@@ -295,46 +295,46 @@ def increase_data(size_TH):
             filename = collect_data('did:plc:'+someone_file.replace('.json',''), until=last_time)
             create_talk(filename)
             # 対話数を更新
-            with open(creating_data_dir+'/'+someone_file, 'r') as f:
+            with open(creating_data_dir+'/'+someone_file, 'r', encoding='utf-8') as f:
                 size = len(json.load(f)['data'])
             # 対話数が増えてない場合は対話数が満たないアカウントとみなしてやめる
             if size == prev_size:
                 break
             # 毎回同じ対象を検索していると当然対話データは増えないので、期間をずらす
-            with open(filename, 'r') as f:
+            with open(filename, 'r', encoding='utf-8') as f:
                 last_time = json.load(f)['posts'][-1]['record']['created_at']
         if size < size_TH:
             # 上記のループを経ても対話数が満たなかった場合はpoor_data_dirに保存しておく
             if os.path.exists(poor_data_dir+'/'+someone_file):
                 # 既に存在している場合、マージするとsize_THを満たす可能性がある
                 merge_data(poor_data_dir+'/'+someone_file, creating_data_dir+'/'+someone_file)
-                with open(logfile, 'a') as f:
+                with open(logfile, 'a', encoding='utf-8') as f:
                     print('  added {} to the poor data'.format(size),file=f)
                 # マージ後の対話数をカウント
                 poor_size = 0
-                with open(poor_data_dir+'/'+someone_file, 'r') as f:
+                with open(poor_data_dir+'/'+someone_file, 'r', encoding='utf-8') as f:
                     poor_size = len(json.load(f))
                 if poor_size >= size_TH:
                     # size_THを満たした場合は完成したデータとして追加
                     if os.path.exists(data_dir+'/'+someone_file):
                         # 既に完成したデータに加えられている可能性もある。その場合はマージする。
                         merge_data(data_dir+'/'+someone_file, poor_data_dir+'/'+someone_file)
-                        with open(logfile, 'a') as f:
+                        with open(logfile, 'a', encoding='utf-8') as f:
                             print('  the poor data reached {} and merged into the data'.format(poor_size),file=f)
                     else:
                         shutil.move(poor_data_dir+'/'+someone_file, data_dir)
-                        with open(logfile, 'a') as f:
+                        with open(logfile, 'a', encoding='utf-8') as f:
                             print('  the poor data reached {}'.format(poor_size),file=f)
             else:
                 shutil.move(creating_data_dir+'/'+someone_file, poor_data_dir)
-                with open(logfile, 'a') as f:
+                with open(logfile, 'a', encoding='utf-8') as f:
                     print('  ended in {}'.format(size),file=f)
             continue
         # ループを抜けた結果、対話数がsize_THを満たした場合、完成したデータとして追加する
         shutil.move(creating_data_dir+'/'+someone_file, data_dir)
-        with open(logfile, 'a') as f:
+        with open(logfile, 'a', encoding='utf-8') as f:
             print('  reached {}'.format(size),file=f)
-    with open(logfile, 'a') as f:
+    with open(logfile, 'a', encoding='utf-8') as f:
         print('request {} times'.format(count),file=f)
 
 def test2():
@@ -376,9 +376,9 @@ def main():
     while count < limit:
         # リクエスト制限にかからない間繰り返す
         # 検索期間をずらす
-        with open(filename, 'r') as f:
+        with open(filename, 'r', encoding='utf-8') as f:
             oldest = json.load(f)['posts'][-1]['record']['created_at']
-        with open(logfile, 'a') as f:
+        with open(logfile, 'a', encoding='utf-8') as f:
             print('collect until {} '.format(oldest),file=f)
         # 新たに収集、生成、作成
         filename = collect_data(until=oldest)
