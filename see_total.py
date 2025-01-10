@@ -10,7 +10,7 @@ poor_data_dir = 'poor_data'
 def print_statics(dir):
     data_num_info = []
     for file in os.listdir(dir):
-        with open(dir+'/'+file, 'r') as f:
+        with open(dir+'/'+file, 'r', encoding='utf-8') as f:
             data_num_info.append(len(json.load(f)['data']))
 
     print(dir)
