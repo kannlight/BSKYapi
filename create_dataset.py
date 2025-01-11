@@ -53,6 +53,8 @@ def collect_data(user_did = None, since = None, until = None):
     # データを収集する関数
     global count
     if count >= limit:
+        with open(logfile, 'a', encoding='utf-8') as f:
+            print('requests reached {} times'.format(count),file=f)
         raise ReachedLimit('リクエスト制限到達')
     # 検索クエリを設定
     p = {'q':'-http -@', 'lang':'ja', 'limit':100}
@@ -113,6 +115,8 @@ def create_talk(json_filename):
     # 各投稿について処理
     for post in data['posts']:
         if count >= limit:
+            with open(logfile, 'a', encoding='utf-8') as f:
+                print('requests reached {} times'.format(count),file=f)
             raise ReachedLimit('リクエスト制限到達')
         # 根を参照
         if post['record']['reply'] != None:
@@ -357,6 +361,7 @@ def main():
     global logfile
     logfile = 'log/'+datetime.datetime.now().strftime('%Y%m%d_%H%M%S')+'.txt'
     # リクエスト回数をリセット
+    global count
     count = 0
     # 最低対話数を設定
     sizeTH = 8
@@ -392,7 +397,7 @@ def automate_main(loop_count):
         try:
             main()
         except ReachedLimit as e:
-            print(e)
+            pass
         elapsed = time.time() - start
         sleeptime = 360 - elapsed
         if sleeptime > 0:
