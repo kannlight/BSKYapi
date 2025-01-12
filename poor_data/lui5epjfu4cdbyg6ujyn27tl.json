@@ -1,0 +1,64 @@
+{
+    "data": [
+        {
+            "talk": [
+                {
+                    "author": "did:plc:lui5epjfu4cdbyg6ujyn27tl",
+                    "type": 1,
+                    "utter": "I'm a pretty aggressive LLM skeptic, but this seems like something an LLM would actually be okay at."
+                },
+                {
+                    "author": "did:plc:legt7xows4ec22dhnrmyfde4",
+                    "type": 2,
+                    "utter": "Ehh, not really unless there was some kind of structure to the metadata. \n\nIt sounds like free text and notes and even an LLM will struggle with some sort of categorization. \n\nI’m not close to the twitter example, but I tried on another free text source and it was only around 30% accurate."
+                },
+                {
+                    "author": "did:plc:lui5epjfu4cdbyg6ujyn27tl",
+                    "type": 3,
+                    "utter": "I'm curious how you structured it. It seems like you could use a transformer architecture with a multi-class output layer instead of the usual sequence output, and go through the human written reasons and label them into categories? I'll believe it would fail, but it seems like a thing to try."
+                }
+            ],
+            "uri": "at://did:plc:lui5epjfu4cdbyg6ujyn27tl/app.bsky.feed.post/3k575ekawfi2q"
+        },
+        {
+            "talk": [
+                {
+                    "author": "did:plc:lui5epjfu4cdbyg6ujyn27tl",
+                    "type": 1,
+                    "utter": "I'm curious how you structured it. It seems like you could use a transformer architecture with a multi-class output layer instead of the usual sequence output, and go through the human written reasons and label them into categories? I'll believe it would fail, but it seems like a thing to try."
+                },
+                {
+                    "author": "did:plc:legt7xows4ec22dhnrmyfde4",
+                    "type": 2,
+                    "utter": "The sample we reviewed (a few hundred) out of the hundreds of thousands we provided was lacklustre at best. \n\nWe may have been able to do more but the costs at this point, with middling results, were not well received to push further."
+                },
+                {
+                    "author": "did:plc:lui5epjfu4cdbyg6ujyn27tl",
+                    "type": 3,
+                    "utter": "That makes sense, especially if you were using GPT instead of an open-source model. The API calls I assume get pretty expensive pretty quickly."
+                }
+            ],
+            "uri": "at://did:plc:lui5epjfu4cdbyg6ujyn27tl/app.bsky.feed.post/3k576w6nczl2x"
+        },
+        {
+            "talk": [
+                {
+                    "author": "did:plc:lui5epjfu4cdbyg6ujyn27tl",
+                    "type": 1,
+                    "utter": "That makes sense, especially if you were using GPT instead of an open-source model. The API calls I assume get pretty expensive pretty quickly."
+                },
+                {
+                    "author": "did:plc:legt7xows4ec22dhnrmyfde4",
+                    "type": 2,
+                    "utter": "It was crazy expensive. We were hoping to use the results to justify hosting our own model (save costs over time) but couldn’t get traction. \n\nAnd, even hosting an open source model with GCP is not exactly cheap either. \n\nStill might happen, but mixed results has put everything on pause."
+                },
+                {
+                    "author": "did:plc:lui5epjfu4cdbyg6ujyn27tl",
+                    "type": 3,
+                    "utter": "Right, it just takes all the FLOPs, you're probably running on a GPU, which is like 4x more expensive than a CPU, etc"
+                }
+            ],
+            "uri": "at://did:plc:lui5epjfu4cdbyg6ujyn27tl/app.bsky.feed.post/3k577bkaqkv2z"
+        }
+    ]
+}

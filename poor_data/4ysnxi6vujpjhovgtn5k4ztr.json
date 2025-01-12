@@ -1,0 +1,24 @@
+{
+    "data": [
+        {
+            "talk": [
+                {
+                    "author": "did:plc:4ysnxi6vujpjhovgtn5k4ztr",
+                    "type": 1,
+                    "utter": "The firehose doesn't require authentication."
+                },
+                {
+                    "author": "did:plc:7qee6cafaw5etkgzc5oqjekk",
+                    "type": 2,
+                    "utter": "I haven't used it, I was just looking at the python sdk and there was a step where the username and credentials were provided in a call after the client was instantiated.\n\nI'm assuming a lot here. But where does the Following feed get pared down to only those that I follow?"
+                },
+                {
+                    "author": "did:plc:4ysnxi6vujpjhovgtn5k4ztr",
+                    "type": 3,
+                    "utter": "That happens in the AppView (the AppView itself consumes the firehose, but anyone can consume the firehose)."
+                }
+            ],
+            "uri": "at://did:plc:4ysnxi6vujpjhovgtn5k4ztr/app.bsky.feed.post/3lbwyd23nos2i"
+        }
+    ]
+}

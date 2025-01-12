@@ -1,0 +1,49 @@
+{
+    "data": [
+        {
+            "talk": [
+                {
+                    "author": "did:plc:4tr5dqti7nmu6g2czpthntak",
+                    "type": 1,
+                    "utter": "If it is not scrollable, it will not be scrolled. The last column can only be moved to the right edge of the screen.\nThis may be a different behavior than TweetDeck (I don't have access to it because I don't pay for it lol)"
+                },
+                {
+                    "author": "did:plc:76h7vzrxiwiplzntk4jeyjc7",
+                    "type": 2,
+                    "utter": "i dont mean scrollable. Currently when i type 4 it jumps to the second column. Typing 1 jumps to the first columns and 9 to the sixth column. On tweetdeck we could use 0-9 to move between columns"
+                },
+                {
+                    "author": "did:plc:4tr5dqti7nmu6g2czpthntak",
+                    "type": 3,
+                    "utter": "Is the column in view when the key is pressed?\nTOKIMEKI has a specification of minimum scrolling that brings the column into view when it is scrollable.\nIf this is difficult to use, we will consider improvements."
+                }
+            ],
+            "uri": "at://did:plc:4tr5dqti7nmu6g2czpthntak/app.bsky.feed.post/3lbu7b7t22c2j"
+        },
+        {
+            "talk": [
+                {
+                    "author": "did:plc:4tr5dqti7nmu6g2czpthntak",
+                    "type": 1,
+                    "utter": "I think it is important to have visibility.\nFor example, if you press the 2 key, TOKIMEKI may not perform scrolling because the second column is already visible in the initial scroll state in most cases."
+                },
+                {
+                    "author": "did:plc:4tr5dqti7nmu6g2czpthntak",
+                    "type": 1,
+                    "utter": "I think the two keys actually work.\nFor example, if you narrow the screen width and press the 2 key after scrolling to the far right, it should move until the second column is in view."
+                },
+                {
+                    "author": "did:plc:76h7vzrxiwiplzntk4jeyjc7",
+                    "type": 2,
+                    "utter": "just tested in full screen and it doesnt work any different, only key 4 to 9 work, 4=1st, 5=2md= 9=6th. Maybe its because im using an english keyboard?"
+                },
+                {
+                    "author": "did:plc:4tr5dqti7nmu6g2czpthntak",
+                    "type": 3,
+                    "utter": "If I narrow the window width, scroll to the far right, and then press the “1” key, does it not scroll until the first column is in view?"
+                }
+            ],
+            "uri": "at://did:plc:4tr5dqti7nmu6g2czpthntak/app.bsky.feed.post/3lbuacnvukk2j"
+        }
+    ]
+}

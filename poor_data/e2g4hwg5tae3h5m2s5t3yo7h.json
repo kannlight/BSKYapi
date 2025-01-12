@@ -1,0 +1,39 @@
+{
+    "data": [
+        {
+            "talk": [
+                {
+                    "author": "did:plc:e2g4hwg5tae3h5m2s5t3yo7h",
+                    "type": 1,
+                    "utter": "昨日組んだPCにUbuntu 24.04 LTSを入れた。ネットワークが認識されないのでUSBのネットワークアダプタを繋げてワークアラウンド。"
+                },
+                {
+                    "author": "did:plc:e2g4hwg5tae3h5m2s5t3yo7h",
+                    "type": 1,
+                    "utter": "使われているネットワークチップが8126という新しいものらしいので、そのせいか。ドライバ探してきて入れても認識せず。OS側の対応を待つか。"
+                },
+                {
+                    "author": "did:plc:e2g4hwg5tae3h5m2s5t3yo7h",
+                    "type": 1,
+                    "utter": "やはり新しい機器はLinuxで使うのは難しい。"
+                },
+                {
+                    "author": "did:plc:xxppa5eqlsx7a6dnl7dlfa5c",
+                    "type": 2,
+                    "utter": "（realtekのサイトでドライバを見つけて）動かすまで楽しそうと思ってしまいましたｗ"
+                },
+                {
+                    "author": "did:plc:e2g4hwg5tae3h5m2s5t3yo7h",
+                    "type": 3,
+                    "utter": "ドライバー入れたんですけど、まだ動かないです"
+                },
+                {
+                    "author": "did:plc:e2g4hwg5tae3h5m2s5t3yo7h",
+                    "type": 3,
+                    "utter": "Realtekのページで見つけたドライバーのカーネルモジュールにサインしたら、やっと動き出しました。セキュアブートの関係でサインしてないモジュールがロードを拒否されていたようです。"
+                }
+            ],
+            "uri": "at://did:plc:e2g4hwg5tae3h5m2s5t3yo7h/app.bsky.feed.post/3lbrtsefxik2h"
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "data": [
+        {
+            "talk": [
+                {
+                    "author": "did:plc:xwiotazruiu3hwziax4dpdak",
+                    "type": 1,
+                    "utter": "This is just a mirror of firehose data; any relay server does the same thing. The question is what people can USE this data for, which is currently murky. Simply backing up and resharing the data isn’t (and can’t be) against the TOS."
+                },
+                {
+                    "author": "did:plc:fgr4mvuihvox4x2is7qmsrc3",
+                    "type": 2,
+                    "utter": "What is the HuggingFace dataset for?"
+                },
+                {
+                    "author": "did:plc:xwiotazruiu3hwziax4dpdak",
+                    "type": 3,
+                    "utter": "depends on what you do with it. It’s just a copy of some old posts sitting in a database until then. There’s lots of both good and bad things it could be used for. But anyone can get that data in realtime for free straight from bluesky."
+                }
+            ],
+            "uri": "at://did:plc:xwiotazruiu3hwziax4dpdak/app.bsky.feed.post/3lbvmxpq7gc2b"
+        },
+        {
+            "talk": [
+                {
+                    "author": "did:plc:xwiotazruiu3hwziax4dpdak",
+                    "type": 1,
+                    "utter": "depends on what you do with it. It’s just a copy of some old posts sitting in a database until then. There’s lots of both good and bad things it could be used for. But anyone can get that data in realtime for free straight from bluesky."
+                },
+                {
+                    "author": "did:plc:fgr4mvuihvox4x2is7qmsrc3",
+                    "type": 2,
+                    "utter": "You didn't answer the question. I'll restate it: Why would HuggingFace collect this datset and publish it?"
+                },
+                {
+                    "author": "did:plc:xwiotazruiu3hwziax4dpdak",
+                    "type": 3,
+                    "utter": "Because it’s helpful in getting started developing bluesky ecosystem apps and good for testing classifiers/feeds/recommendation systems on a static dataset so you can quantitatively measure improvements. \n\nThis data has negligible value as a “GenAI” training set if that’s where you’re going."
+                }
+            ],
+            "uri": "at://did:plc:xwiotazruiu3hwziax4dpdak/app.bsky.feed.post/3lbvnh4vr6s2b"
+        }
+    ]
+}

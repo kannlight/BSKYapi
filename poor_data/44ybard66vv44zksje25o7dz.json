@@ -1,0 +1,64 @@
+{
+    "data": [
+        {
+            "talk": [
+                {
+                    "author": "did:plc:44ybard66vv44zksje25o7dz",
+                    "type": 1,
+                    "utter": "some of these ideas have been in the ActivityPub conversation from the start! DIDs, content-addressed data, nomadic identity, data transfer, are all active conversations.\n\nsome will be heavy lifts and a long path to full deployment. big changes to deployed networks are possible but hard. v2?"
+                },
+                {
+                    "author": "did:plc:ko4q2nth6k46rsimakpo4jlt",
+                    "type": 2,
+                    "utter": "I still wonder why #bluesky didn't build on #activitypub.\n\n#bluesky, #mastodon, #threads, and countless #activitypub applications could have worked together.\n\nTechnically, that's not a problem: Everything that #bluesky was missing in #activitypub could have been easily implemented as extensions."
+                },
+                {
+                    "author": "did:plc:44ybard66vv44zksje25o7dz",
+                    "type": 3,
+                    "utter": "did you read the post? I think both Christine and I flag significant, deep architectural differences. An ActivityPub that functioned like atproto would no longer be ActivityPub, and vice-versa."
+                },
+                {
+                    "author": "did:plc:44ybard66vv44zksje25o7dz",
+                    "type": 3,
+                    "utter": "extensions are cool, but if there isn't interop what is the point? eg, if we had added nomadic identity and data transfer, but Mastodon (the software project) never implemented their side, what would have been the point?"
+                }
+            ],
+            "uri": "at://did:plc:44ybard66vv44zksje25o7dz/app.bsky.feed.post/3lbxipo4fac2n"
+        },
+        {
+            "talk": [
+                {
+                    "author": "did:plc:44ybard66vv44zksje25o7dz",
+                    "type": 1,
+                    "utter": "did you read the post? I think both Christine and I flag significant, deep architectural differences. An ActivityPub that functioned like atproto would no longer be ActivityPub, and vice-versa."
+                },
+                {
+                    "author": "did:plc:44ybard66vv44zksje25o7dz",
+                    "type": 1,
+                    "utter": "extensions are cool, but if there isn't interop what is the point? eg, if we had added nomadic identity and data transfer, but Mastodon (the software project) never implemented their side, what would have been the point?"
+                },
+                {
+                    "author": "did:plc:ko4q2nth6k46rsimakpo4jlt",
+                    "type": 2,
+                    "utter": "Well, #atproto is cool, but since there is no interop what is the point? eg nobody else implemented their side, so what is the point?😉"
+                },
+                {
+                    "author": "did:plc:ko4q2nth6k46rsimakpo4jlt",
+                    "type": 2,
+                    "utter": "The point is: \n\nIf #bluesky was built on top of #activitypub (even if #mastodon didn't implement #bluesky-#activitypub extensions), then this would have enabled significant interaction between #bluesky, #mastodon and #threads. \n\nWouldn't that have been cool?\n\nWhat speaks against it?"
+                },
+                {
+                    "author": "did:plc:44ybard66vv44zksje25o7dz",
+                    "type": 3,
+                    "utter": "I'm not really sure what you mean: a ton of folks have implemented interoperable systems with atproto. feed generators, PDS implementations, labelers, etc.\n\nif you want just any degree of interop with mastodon, doesn't bridgy fed work?"
+                },
+                {
+                    "author": "did:plc:44ybard66vv44zksje25o7dz",
+                    "type": 3,
+                    "utter": "what we don't want is Threads <=> Mastodon style interop: some messages get passed \"natively\", but you can't actually migrate accounts and \"exit\""
+                }
+            ],
+            "uri": "at://did:plc:44ybard66vv44zksje25o7dz/app.bsky.feed.post/3lbxnmq3qqs23"
+        }
+    ]
+}
