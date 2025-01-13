@@ -77,6 +77,12 @@ def collect_data(user_did = None, since = None, until = None):
                 raise e  # リトライ上限に達したら例外をスロー
     decoded_res = json.loads(res.model_dump_json())
     
+    # 結果のフィルタリング前に検索結果の時間の範囲を記録
+    earliest_time = decoded_res['posts'][0]['record']['created_at']
+    oldest_time = decoded_res['posts'][-1]['record']['created_at']
+    # jsonに書き込んでおく
+    decoded_res['period'] = {'earliest':earliest_time, 'oldest':oldest_time}
+
     # 画像や動画を含む投稿やリプライの親子を持たない投稿を除外
     noises = []
     for post in decoded_res['posts']:
@@ -307,7 +313,7 @@ def increase_data(size_TH):
                 break
             # 毎回同じ対象を検索していると当然対話データは増えないので、期間をずらす
             with open(filename, 'r', encoding='utf-8') as f:
-                last_time = json.load(f)['posts'][-1]['record']['created_at']
+                last_time = json.load(f)['period']['oldest']
         if size < size_TH:
             # 上記のループを経ても対話数が満たなかった場合はpoor_data_dirに保存しておく
             if os.path.exists(poor_data_dir+'/'+someone_file):
@@ -383,7 +389,7 @@ def main():
         # リクエスト制限にかからない間繰り返す
         # 検索期間をずらす
         with open(filename, 'r', encoding='utf-8') as f:
-            oldest = json.load(f)['posts'][-1]['record']['created_at']
+            oldest = json.load(f)['period']['oldest']
         with open(logfile, 'a', encoding='utf-8') as f:
             print('collect until {} '.format(oldest),file=f)
         # 新たに収集、生成、作成
