@@ -78,10 +78,11 @@ def collect_data(user_did = None, since = None, until = None):
     decoded_res = json.loads(res.model_dump_json())
     
     # 結果のフィルタリング前に検索結果の時間の範囲を記録
-    earliest_time = decoded_res['posts'][0]['record']['created_at']
-    oldest_time = decoded_res['posts'][-1]['record']['created_at']
-    # jsonに書き込んでおく
-    decoded_res['period'] = {'earliest':earliest_time, 'oldest':oldest_time}
+    if len(decoded_res) > 0:
+        earliest_time = decoded_res['posts'][0]['record']['created_at']
+        oldest_time = decoded_res['posts'][-1]['record']['created_at']
+        # jsonに書き込んでおく
+        decoded_res['period'] = {'earliest':earliest_time, 'oldest':oldest_time}
 
     # 画像や動画を含む投稿やリプライの親子を持たない投稿を除外
     noises = []
