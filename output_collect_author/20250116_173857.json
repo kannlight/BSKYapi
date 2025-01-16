@@ -1,0 +1,102 @@
+{
+    "posts": [
+        {
+            "author": {
+                "did": "did:plc:oinvflpmw4kcrpn7fxuhpjfk",
+                "handle": "amagumoya.bsky.social",
+                "associated": {
+                    "chat": {
+                        "allow_incoming": "following",
+                        "py_type": "app.bsky.actor.defs#profileAssociatedChat"
+                    },
+                    "feedgens": null,
+                    "labeler": null,
+                    "lists": null,
+                    "starter_packs": null,
+                    "py_type": "app.bsky.actor.defs#profileAssociated"
+                },
+                "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:oinvflpmw4kcrpn7fxuhpjfk/bafkreihhlbg3uqyhhszmcmbm7pnng7vqtu3bl6oih2ga2r6omkldvphpfa@jpeg",
+                "created_at": "2024-02-02T10:37:34.710Z",
+                "display_name": "\u3042\u307e\u3050\u3082",
+                "labels": [
+                    {
+                        "cts": "1970-01-01T00:00:00.000Z",
+                        "src": "did:plc:oinvflpmw4kcrpn7fxuhpjfk",
+                        "uri": "at://did:plc:oinvflpmw4kcrpn7fxuhpjfk/app.bsky.actor.profile/self",
+                        "val": "!no-unauthenticated",
+                        "cid": "bafyreid5obf5q7fmoidrwhe3g23xkwu7ukjd42nqg6c5hgkb7jbbo6q7zi",
+                        "exp": null,
+                        "neg": null,
+                        "sig": null,
+                        "ver": null,
+                        "py_type": "com.atproto.label.defs#label"
+                    }
+                ],
+                "viewer": {
+                    "blocked_by": false,
+                    "blocking": null,
+                    "blocking_by_list": null,
+                    "followed_by": null,
+                    "following": null,
+                    "known_followers": null,
+                    "muted": false,
+                    "muted_by_list": null,
+                    "py_type": "app.bsky.actor.defs#viewerState"
+                },
+                "py_type": "app.bsky.actor.defs#profileViewBasic"
+            },
+            "cid": "bafyreigpbqkbba7x3vfst3s6oynnddsepljlx5mehtwfwutzwkh4azlrzu",
+            "indexed_at": "2025-01-09T10:48:33.046Z",
+            "record": {
+                "created_at": "2025-01-09T10:48:33.279Z",
+                "text": "\u300c\u52c7\u5c3e\u65e5\u3005\u300d\u3092\u8aad\u307f\u8fd4\u3057\u3066\u3044\u307e\u3059\u3002\u5e78\u305b\u305d\u3046\u306a\u52c7\u5c3e\u304c\u3044\u3063\u3071\u3044\u3067\u3001\u6700\u9ad8\u3067\u3059\u2728\ufe0f\n\u672c\u3092\u4f5c\u3063\u3066\u304f\u3060\u3055\u3063\u3066\u3001\u3042\u308a\u304c\u3068\u3046\u3054\u3056\u3044\u307e\u3059\uff01",
+                "embed": null,
+                "entities": null,
+                "facets": null,
+                "labels": null,
+                "langs": [
+                    "ja"
+                ],
+                "reply": {
+                    "parent": {
+                        "cid": "bafyreiekfrjqowjdwi5xlm675vgu72egy5kbuot23w7pvncnkwoh5aqwau",
+                        "uri": "at://did:plc:xe7pyqy4tvxfgwqbhztefcox/app.bsky.feed.post/3lfc5cn6tak2s",
+                        "py_type": "com.atproto.repo.strongRef"
+                    },
+                    "root": {
+                        "cid": "bafyreiekfrjqowjdwi5xlm675vgu72egy5kbuot23w7pvncnkwoh5aqwau",
+                        "uri": "at://did:plc:xe7pyqy4tvxfgwqbhztefcox/app.bsky.feed.post/3lfc5cn6tak2s",
+                        "py_type": "com.atproto.repo.strongRef"
+                    },
+                    "py_type": "app.bsky.feed.post#replyRef"
+                },
+                "tags": null,
+                "py_type": "app.bsky.feed.post"
+            },
+            "uri": "at://did:plc:oinvflpmw4kcrpn7fxuhpjfk/app.bsky.feed.post/3lfciw53t2s2b",
+            "embed": null,
+            "labels": [],
+            "like_count": 0,
+            "quote_count": 0,
+            "reply_count": 1,
+            "repost_count": 0,
+            "threadgate": null,
+            "viewer": {
+                "embedding_disabled": false,
+                "like": null,
+                "pinned": null,
+                "reply_disabled": null,
+                "repost": null,
+                "thread_muted": false,
+                "py_type": "app.bsky.feed.defs#viewerState"
+            },
+            "py_type": "app.bsky.feed.defs#postView"
+        }
+    ],
+    "cursor": "100",
+    "hits_total": null,
+    "period": {
+        "earliest": "2025-01-15T22:40:14.217Z",
+        "oldest": "2024-12-29T04:48:09.965Z"
+    }
+}
