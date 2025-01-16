@@ -1,0 +1,49 @@
+{
+    "data": [
+        {
+            "talk": [
+                {
+                    "author": "did:plc:4czc4jsssc25mxj6jlauvten",
+                    "type": 1,
+                    "utter": "i get the concern, but seeing .gov domains would help drive home what actually constitutes an authoritative us gov account. if anything, seeing a gov from the us that doesn't use .gov looks incredibly weird."
+                },
+                {
+                    "author": "did:plc:4czc4jsssc25mxj6jlauvten",
+                    "type": 1,
+                    "utter": "already, people know to look for \".gov\". and the usual attempt to hide with stuff like \"thing.gov-some-obviously-fake-path.malicious.example\" would stick out like a sore thumb, in stark contrast to urls where that hyphen could be misread as a slash."
+                },
+                {
+                    "author": "did:plc:4czc4jsssc25mxj6jlauvten",
+                    "type": 1,
+                    "utter": "scammers could try stunts like \".got\" instead of \".gov\" tho, and that is of concern. i'll file a feature request against the app to help catch that low-hanging fruit."
+                },
+                {
+                    "author": "did:plc:ffstfhmcqcmobvr5klyw6aju",
+                    "type": 2,
+                    "utter": "I'm afraid you might be concentrating too much on the US & I feel you expect millions of non-tech users to think the same way like you do, which I expect they won't. Think international 😉. Afaik there are only a few (mostly English speaking) countries that use the gov[.<country>] construction."
+                },
+                {
+                    "author": "did:plc:ffstfhmcqcmobvr5klyw6aju",
+                    "type": 2,
+                    "utter": "And the problem is not only with government sites, but, maybe even more, with commercial (banking, webshops, travel) organizations. wells-fargo, wellsfargo or wellsfargo-bank.com? Imho it's not fair to expect an ordinary user to recognize all possible scam-techniques."
+                },
+                {
+                    "author": "did:plc:ffstfhmcqcmobvr5klyw6aju",
+                    "type": 2,
+                    "utter": "Catching low-hanging fruit, as you propose, surely is a very valuable first step, but couldn't that result in a false sense of security & isn't that symptom control? A trusted (3rd?) party assuring me that the user is indeed who they say they are is, I think, a (the only?🤔) more reliable solution."
+                },
+                {
+                    "author": "did:plc:4czc4jsssc25mxj6jlauvten",
+                    "type": 3,
+                    "utter": "gov domains are usually very discoverable. and ideally, we'd have something like the timezone database for these domains, but afaict there isn't such a thing.\n\nsuch a database would be incredibly valuable for more than just bluesky, but browsers and spam detectors as well."
+                },
+                {
+                    "author": "did:plc:4czc4jsssc25mxj6jlauvten",
+                    "type": 3,
+                    "utter": "fun fact: the time zone database everyone uses is maintained by just one volunteer who's been involved in it since the 90s. data.iana.org/time-zones/t...\n\nthe public suffix list is similarly maintained by only a few volunteers. publicsuffix.org"
+                }
+            ],
+            "uri": "at://did:plc:4czc4jsssc25mxj6jlauvten/app.bsky.feed.post/3lbh6q3hwys2c"
+        }
+    ]
+}
