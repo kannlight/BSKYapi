@@ -1,0 +1,24 @@
+{
+    "data": [
+        {
+            "talk": [
+                {
+                    "author": "did:plc:42er57tl3tymmbr5pxxzsyr6",
+                    "type": 1,
+                    "utter": "I wouldn't have given this specific info. Be careful. Or are they simply physically labeled as such but not identified that way on any networks or in any code."
+                },
+                {
+                    "author": "did:plc:5vmkw5e5if7sespehv5sp7tl",
+                    "type": 2,
+                    "utter": "It's all open info. Devs need to be able to send HTTP requests to the PDSs for certain use cases. But there's nothing truly private in there."
+                },
+                {
+                    "author": "did:plc:42er57tl3tymmbr5pxxzsyr6",
+                    "type": 3,
+                    "utter": "I say this only because of how it can be exploited depending on configuration. So my hope is that what devs send HTTP requests to is just the public name, but internally there's a private name or IP that requests are routed to, and firewall is set so only authorized traffic gets private IP."
+                }
+            ],
+            "uri": "at://did:plc:42er57tl3tymmbr5pxxzsyr6/app.bsky.feed.post/3lbdbtqxyc22a"
+        }
+    ]
+}
