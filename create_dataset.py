@@ -210,7 +210,8 @@ def extract_talk_from_array(array):
             break
         # 次のheadの位置を記憶しておく
         next_head = i
-        # 作成済みの受信者ならスキップ(無くしたほうが良い，なぜこの制約をつけたかわからない)
+        # 作成済みの受信者ならスキップ
+        # 無くしたほうが収集効率は上がる．ただデータ完成時に既存ファイルへマージするといった設計変更は必要
         if recept_did.replace('did:plc:', '')+'.json' in created_files:
             head = next_head
             continue
